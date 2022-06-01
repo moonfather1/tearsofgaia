@@ -1,0 +1,34 @@
+{
+	"item.tearsofgaia.gem_water": "Гајина суза",
+	"item.tearsofgaia.gem_air": "Гајина суза",
+	"item.tearsofgaia.gem_earth": "Гајина суза",
+	"item.tearsofgaia.gem_fire": "Гајина суза",
+
+	"item.tearsofgaia.gem_water.subtitle": "Елемент: вода",
+	"item.tearsofgaia.gem_air.subtitle": "Елемент: ваздух",
+	"item.tearsofgaia.gem_earth.subtitle": "Елемент: земља",
+	"item.tearsofgaia.gem_fire.subtitle": "Елемент: ватра",
+
+	"item.tearsofgaia.gem_all.subtitle2": "Можда можеш да уградиш есенцију овог драгуља у твоје алатке или оклоп.",
+
+	"item.tearsofgaia.gem_water.usage_1": "Повећава ниво \"Smith's triumph\" чаролије на алатки/оклопу и уклања клетве. Стварчице у које је укован овај драгуљ могу бесконачно дуго трајати ван инвентара.",
+	"item.tearsofgaia.gem_fire.usage_1": "Стварчице у које је укован овај драгуљ могу бесконачно дуго трајати ван инвентара и неће бити уништене у ватри или лави. Ако испадну у лаву (без обзира да ли то играч преживи), лебдеће док их неко не покупи.",
+	"item.tearsofgaia.gem_air.usage_1": "Стварчице у које је укован овај драгуљ могу бесконачно дуго трајати ван инвентара и неће пасти у празнину. Ако испадну изнад празнине (без обзира да ли то играч преживи), лебдеће док их неко не покупи.",
+	"item.tearsofgaia.gem_earth.usage_1": "Повећава ниво \"несаломивости\" на алатки. Стварчице у које је укован овај драгуљ могу бесконачно дуго трајати ван инвентара.",
+
+	"tearsofgaia.config.title ": " Gaia's tears - конфигурација",
+
+	"item.tearsofgaia.gem_water_level2": "Гајина суза",
+	"item.tearsofgaia.gem_air_level2": "Гајина суза",
+	"item.tearsofgaia.gem_earth_level2": "Гајина суза",
+	"item.tearsofgaia.gem_fire_level2": "Гајина суза",
+	"item.tearsofgaia.level_suffix": "%s (ниво %d)",
+
+	"item.tearsofgaia.gem_water.usage_2": "Потпуно поправља оштећене стварчице и уклања клетве. Повећава ниво свих \"чаролија\" на алатки.",
+	"item.tearsofgaia.gem_fire.usage_2": "Власник постаје имун на ватру кад затреба, уз озбиљно оштећење стварчице (стварчица мора бити у слоту за оклоп или у једној од две руке).",
+	"item.tearsofgaia.gem_air.usage_2": "Функционише као тотем неумирања кад затреба (стварчица мора бити у слоту за оклоп или у једној од две руке). Исти овакав драгуљ може бити поново додат на наковњу након активације.",
+	"item.tearsofgaia.gem_earth.usage_2": "Повећава ниво \"Soulbound\" чаролије на алатки/оклопу (стварчица остаје у инвентару након што власник загине; ниво чаролије се смањује). Исти овакав драгуљ може бити поново додат на наковњу након што се потроши.",
+
+	"enchantment.tearsofgaia.soulbound_mf": "Повезаност",
+	"enchantment.tearsofgaia.repair_mf": "Ковачев тријумф"
+}

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values":
+  [
+    "tearsofgaia:gem_earth",
+    "tearsofgaia:gem_water",
+    "tearsofgaia:gem_air",
+    "tearsofgaia:gem_fire",
+    "tearsofgaia:gem_earth_level2",
+    "tearsofgaia:gem_water_level2",
+    "tearsofgaia:gem_air_level2",
+    "tearsofgaia:gem_fire_level2"
+  ]
+}

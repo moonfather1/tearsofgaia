@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#I#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "tearsofgaia:gem_earth"
+    },
+    "I": {
+      "item": "minecraft:golden_apple",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "tearsofgaia:gem_earth_level2",
+    "count": 1
+  },
+  "group": "misc",
+  "conditions":
+  [
+    {
+      "type": "tearsofgaia:optional",
+      "flag_code": "level_two_gems_enabled"
+    }
+  ]
+}

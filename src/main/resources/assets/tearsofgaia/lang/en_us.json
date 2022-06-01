@@ -1,0 +1,34 @@
+{
+	"item.tearsofgaia.gem_water": "Tear of Gaia",
+	"item.tearsofgaia.gem_air": "Tear of Gaia",
+	"item.tearsofgaia.gem_earth": "Tear of Gaia",
+	"item.tearsofgaia.gem_fire": "Tear of Gaia",
+
+	"item.tearsofgaia.gem_water.subtitle": "Element: water",
+	"item.tearsofgaia.gem_air.subtitle": "Element: air",
+	"item.tearsofgaia.gem_earth.subtitle": "Element: earth",
+	"item.tearsofgaia.gem_fire.subtitle": "Element: fire",
+	
+	"item.tearsofgaia.gem_all.subtitle2": "You might be able to forge its essence into your tool.",
+	
+	"item.tearsofgaia.gem_water.usage_1": "Increases the level of Smith's triumph enchantment (anvil cost limited) and removes curses. Items imbued with this tear do not expire in world.",
+	"item.tearsofgaia.gem_fire.usage_1": "Items imbued with this tear do not expire in world and will not be destroyed by fire or lava. If dropped into lava, they will float until player picks them up.",
+	"item.tearsofgaia.gem_air.usage_1": "Items imbued with this tear do not expire in world and will not fall into void. If dropped above void, they will float until player picks them up.",
+	"item.tearsofgaia.gem_earth.usage_1": "Increases the level of unbreaking enchantment. Items imbued with this tear do not expire in world.",
+
+	"tearsofgaia.config.title ": " Gaia's tears - configuration",
+
+	"item.tearsofgaia.gem_water_level2": "Tear of Gaia",
+	"item.tearsofgaia.gem_air_level2": "Tear of Gaia",
+	"item.tearsofgaia.gem_earth_level2": "Tear of Gaia",
+	"item.tearsofgaia.gem_fire_level2": "Tear of Gaia",
+	"item.tearsofgaia.level_suffix": "%s (level %d)",
+
+	"item.tearsofgaia.gem_water.usage_2": "Fully repairs damaged items and removes curses. Increases levels of all enchantments.",
+	"item.tearsofgaia.gem_fire.usage_2": "Fire immunity bestowed upon player when needed, at a heavy cost of item durability.",
+	"item.tearsofgaia.gem_air.usage_2": "Acts as totem of undying when needed. Another gem may be imbued after totem activation (as if the item reverted to level 1).",
+	"item.tearsofgaia.gem_earth.usage_2": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued after Soulbound enchantment is used up (as if the item reverted to level 1).",
+
+	"enchantment.tearsofgaia.soulbound_mf": "Soulbound",
+	"enchantment.tearsofgaia.repair_mf": "Smith's Triumph"
+}
