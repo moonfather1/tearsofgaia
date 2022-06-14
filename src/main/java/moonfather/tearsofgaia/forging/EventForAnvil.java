@@ -4,6 +4,7 @@ import moonfather.tearsofgaia.Constants;
 import moonfather.tearsofgaia.RegistryManager;
 import moonfather.tearsofgaia.enchantments.EnchantmentEasyRepair;
 import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
+import moonfather.tearsofgaia.integration.IntegrationTinkersTools;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -14,8 +15,10 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 
 
@@ -40,6 +43,14 @@ public class EventForAnvil
 		if (left.isEmpty() || right.isEmpty())
 		{
 			return;
+		}
+		else if (IntegrationTinkersTools.isTinkersTool(left) && ElementalHelper.IsTear(right) || IntegrationTinkersTools.isTinkersTool(right) && ElementalHelper.IsTear(left))
+		{
+			ItemStack lorePotato = new ItemStack(Items.POISONOUS_POTATO);
+			lorePotato.getOrCreateTag().putString("tog_message_for_tc", "special");
+			lorePotato.setHoverName(left.getHoverName());
+			event.setOutput(lorePotato);
+			event.setCost(31568);
 		}
 		else if (ElementalHelper.IsTear(right) && IsValidItem(left, ElementalHelper.GetTearElement(right), ElementalHelper.GetTearLevel(right)))
 		{
@@ -175,7 +186,6 @@ public class EventForAnvil
 			{
 				output.enchant(Enchantments.UNBREAKING, 1);
 			}
-			//TC:    NBTTagCompound extra = output.getTagCompound();              /////////////////////////////
 		}
 		else if (element.equals("water"))
 		{
@@ -304,7 +314,7 @@ public class EventForAnvil
 
 	private static boolean IsEquipableArmorOrShieldOrHorseEquipement(ItemStack stack)
 	{
-		if (stack.getEquipmentSlot() != EquipmentSlotType.MAINHAND)
+		if (stack.getEquipmentSlot() != null && stack.getEquipmentSlot() != EquipmentSlotType.MAINHAND)
 		{
 			return true;
 		}
@@ -316,6 +326,6 @@ public class EventForAnvil
 		{
 			return true;
 		}
-		return  false;
+		return false;
 	}
 }

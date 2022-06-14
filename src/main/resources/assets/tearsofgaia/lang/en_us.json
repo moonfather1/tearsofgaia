@@ -16,7 +16,8 @@
 	"item.tearsofgaia.gem_air.usage_1": "Items imbued with this tear do not expire in world and will not fall into void. If dropped above void, they will float until player picks them up.",
 	"item.tearsofgaia.gem_earth.usage_1": "Increases the level of unbreaking enchantment. Items imbued with this tear do not expire in world.",
 
-	"tearsofgaia.config.title ": " Gaia's tears - configuration",
+	"tearsofgaia.message.tinkersconstruct": "You can not imbue a tear gem into a Tinker's tool.",
+	"tearsofgaia.message.line2": "That would be way too much.",
 
 	"item.tearsofgaia.gem_water_level2": "Tear of Gaia",
 	"item.tearsofgaia.gem_air_level2": "Tear of Gaia",
@@ -24,11 +25,13 @@
 	"item.tearsofgaia.gem_fire_level2": "Tear of Gaia",
 	"item.tearsofgaia.level_suffix": "%s (level %d)",
 
-	"item.tearsofgaia.gem_water.usage_2": "Fully repairs damaged items and removes curses. Increases levels of all enchantments.",
+	"item.tearsofgaia.gem_water.usage_2": "Repairs damaged items and removes curses. Increases levels of all enchantments.",
 	"item.tearsofgaia.gem_fire.usage_2": "Fire immunity bestowed upon player when needed, at a heavy cost of item durability.",
 	"item.tearsofgaia.gem_air.usage_2": "Acts as totem of undying when needed. Another gem may be imbued after totem activation (as if the item reverted to level 1).",
 	"item.tearsofgaia.gem_earth.usage_2": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued after Soulbound enchantment is used up (as if the item reverted to level 1).",
 
 	"enchantment.tearsofgaia.soulbound_mf": "Soulbound",
-	"enchantment.tearsofgaia.repair_mf": "Smith's Triumph"
+	"enchantment.tearsofgaia.repair_mf": "Smith's Triumph",
+	"enchantment.tearsofgaia.soulbound_mf.desc": "Item stays in inventory on player death. After that happens, enchantment level gets decreased.",
+	"enchantment.tearsofgaia.repair_mf.desc": "Repair cost on anvil is capped when repairing using main material; higher enchantment levels reduce cap."
 }

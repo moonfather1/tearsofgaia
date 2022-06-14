@@ -90,8 +90,14 @@ public class ElementalHelper
 			return;
 		}
 		int current = GetTempTooltipTime(stack);
-		int newTime = current > 0 ? current - 1 : 0;
-		stack.getOrCreateTag().putInt(Constants.TAG_KEY_TTT_TIME, newTime);
+		if (current > 1)
+		{
+			stack.getOrCreateTag().putInt(Constants.TAG_KEY_TTT_TIME, current - 1);
+		}
+		else
+		{
+			stack.getOrCreateTag().remove(Constants.TAG_KEY_TTT_TIME);
+		}
 		//int current2 = stack.getTag().getInt(Constants.TAG_KEY_TTT_TIME);
 		//System.out.println("---- UpdateTempTooltipTime " + stack.hashCode() + ":    " + current + "->" + newTime + "   ====>" + current2);
 	}

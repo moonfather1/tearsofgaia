@@ -11,9 +11,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-//todo: TC
-//todo: ench info
-//todo: jei ingredient info?
+//todo: tempTooltipTime needs network
+
 @Mod(Constants.MODID)
 public class ModTears
 {
@@ -29,6 +28,5 @@ public class ModTears
     private void setup(final FMLCommonSetupEvent event)
     {
         CraftingHelper.register(new OptionalRecipeCondition.Serializer(new ResourceLocation(Constants.MODID, "optional")));
-
     }
 }

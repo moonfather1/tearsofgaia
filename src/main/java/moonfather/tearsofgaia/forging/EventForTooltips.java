@@ -1,10 +1,10 @@
 package moonfather.tearsofgaia.forging;
 
+import moonfather.tearsofgaia.Constants;
 import moonfather.tearsofgaia.ModTears;
 import moonfather.tearsofgaia.items.ItemGem;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.item.Items;
+import net.minecraft.util.text.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +22,15 @@ public class EventForTooltips
 			AddSpecialTextShownAboveSubtitle(event, element, level);
 			event.getToolTip().add(ItemGem.GetSubtitleLine1Text(element, level));
 		}
+		else if (event.getItemStack().getItem().equals(Items.POISONOUS_POTATO))
+		{
+			if (event.getItemStack().getTag() != null && event.getItemStack().getTag().contains("tog_message_for_tc"))
+			{
+				Color color = Color.fromRgb(0xff8566);
+				event.getToolTip().add(new TranslationTextComponent("tearsofgaia.message.tinkersconstruct").withStyle(Style.EMPTY.withColor(color)));
+				event.getToolTip().add(new TranslationTextComponent("tearsofgaia.message.line2").withStyle(Style.EMPTY.withColor(color)));
+			}
+		}
 	}
 
 
@@ -29,7 +38,6 @@ public class EventForTooltips
 	{
 		if (element.equals("air") && level == 2)
 		{
-			////!! zasto ne radi?
 			event.getToolTip().add(new TranslationTextComponent("item.minecraft.totem_of_undying").withStyle(TextFormatting.YELLOW));
 		}
 	}

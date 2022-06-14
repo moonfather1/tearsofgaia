@@ -18,15 +18,21 @@ public class EventForEasyRepair
 		int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentEasyRepair.GetInstance(), left);
 		if (enchantmentLevel == 0)
 		{
-			enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentEasyRepair.GetInstance(), right);
+			return; // doesn't have cheap repair enchantment
 		}
-		if (enchantmentLevel == 0)
+		if (!left.getItem().isValidRepairItem(left, right))
 		{
-			return;
+			return; // only for repairing, not imbuing or adding enchantments
 		}
-		if (event.getCost() > EnchantmentEasyRepair.GetMaxAnvilCost(enchantmentLevel))
+		int maxCost = EnchantmentEasyRepair.GetMaxAnvilCost(enchantmentLevel) + Math.min(right.getCount(), 4) - 1;
+		if (event.getCost() > maxCost)
 		{
-			event.setCost(EnchantmentEasyRepair.GetMaxAnvilCost(enchantmentLevel));
+			event.setCost(maxCost);
 		}
+		ItemStack output = left.copy();
+		int newDamage = output.getDamageValue() - right.getCount() * output.getMaxDamage() / 4;
+		newDamage = Math.max(newDamage, 0);
+		output.setDamageValue(newDamage);
+		event.setOutput(output);
 	}
 }

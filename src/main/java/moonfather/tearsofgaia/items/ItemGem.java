@@ -68,6 +68,10 @@ public class ItemGem extends Item
 		}
 		else
 		{
+			if (tempTooltipTime > 495 || tempTooltipTime < 6)
+			{
+				//System.out.println("~~~~~~~~~~ tempTooltipTime==" + tempTooltipTime);
+			}
 			list.add(new StringTextComponent(" "));
 			list.add(this.subtitle2B);
 			ElementalHelper.UpdateTempTooltipTime(itemStack);
