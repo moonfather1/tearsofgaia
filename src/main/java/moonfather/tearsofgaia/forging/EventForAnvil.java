@@ -46,11 +46,7 @@ public class EventForAnvil
 		}
 		else if (IntegrationTinkersTools.isTinkersTool(left) && ElementalHelper.IsTear(right) || IntegrationTinkersTools.isTinkersTool(right) && ElementalHelper.IsTear(left))
 		{
-			ItemStack lorePotato = new ItemStack(Items.POISONOUS_POTATO);
-			lorePotato.getOrCreateTag().putString("tog_message_for_tc", "special");
-			lorePotato.setHoverName(left.getHoverName());
-			event.setOutput(lorePotato);
-			event.setCost(31568);
+			IntegrationTinkersTools.makeAndStoreResult(left, right, event);
 		}
 		else if (ElementalHelper.IsTear(right) && IsValidItem(left, ElementalHelper.GetTearElement(right), ElementalHelper.GetTearLevel(right)))
 		{
