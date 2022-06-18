@@ -2,6 +2,8 @@ package moonfather.tearsofgaia.forging;
 
 import moonfather.tearsofgaia.Constants;
 import moonfather.tearsofgaia.ModTears;
+import moonfather.tearsofgaia.integration.AnvilHelperTetra;
+import moonfather.tearsofgaia.integration.IntegrationTetra;
 import moonfather.tearsofgaia.items.ItemGem;
 import net.minecraft.item.Items;
 import net.minecraft.util.text.*;
@@ -34,11 +36,15 @@ public class EventForTooltips
 	}
 
 
-	public static void AddSpecialTextShownAboveSubtitle(ItemTooltipEvent event, String element, int level)
+	private static void AddSpecialTextShownAboveSubtitle(ItemTooltipEvent event, String element, int level)
 	{
 		if (element.equals("air") && level == 2)
 		{
 			event.getToolTip().add(new TranslationTextComponent("item.minecraft.totem_of_undying").withStyle(TextFormatting.YELLOW));
+		}
+		if (element.equals("earth") && level == 2)
+		{
+			IntegrationTetra.AddSpecialTextShownAboveSubtitle(event, element, level);
 		}
 	}
 }

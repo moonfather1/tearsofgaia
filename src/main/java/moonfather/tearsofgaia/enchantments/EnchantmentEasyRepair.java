@@ -63,9 +63,9 @@ public class EnchantmentEasyRepair extends Enchantment
 	{
 		return stack.getItemEnchantability() > 0
 			&& (
-				(! (stack.getItem() instanceof TieredItem) || (((TieredItem) stack.getItem()).getTier().getLevel() > 1 || ((TieredItem) stack.getItem()).getTier().equals(ItemTier.GOLD)))
-				// not p or q
-				|| (! (stack.getItem() instanceof ArmorItem) || ! ((ArmorItem) stack.getItem()).getMaterial().equals(ArmorMaterial.LEATHER))
+				! (stack.getItem() instanceof TieredItem || stack.getItem() instanceof ArmorItem)
+				|| (stack.getItem() instanceof TieredItem && (((TieredItem) stack.getItem()).getTier().getLevel() > 1 || ((TieredItem) stack.getItem()).getTier().equals(ItemTier.GOLD)))
+				|| (stack.getItem() instanceof ArmorItem && ! ((ArmorItem) stack.getItem()).getMaterial().equals(ArmorMaterial.LEATHER))
 			);
 	}
 

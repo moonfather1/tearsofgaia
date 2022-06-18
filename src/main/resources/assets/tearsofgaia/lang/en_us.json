@@ -16,8 +16,19 @@
 	"item.tearsofgaia.gem_air.usage_1": "Items imbued with this tear do not expire in world and will not fall into void. If dropped above void, they will float until player picks them up.",
 	"item.tearsofgaia.gem_earth.usage_1": "Increases the level of unbreaking enchantment. Items imbued with this tear do not expire in world.",
 
+	"item.tearsofgaia.gem_water.usage_1_tetra": "Items imbued with this tear do not expire in world. While held in hand or worn, item has a chance to negate incoming wither effect, at the cost of durability.",
+	"item.tearsofgaia.gem_earth.usage_1_tetra": "Items imbued with this tear do not expire in world. While held in hand or worn, item has a chance to negate incoming poison effect, at the cost of durability.",
+	"item.tearsofgaia.gem_water.usage_2_tetra": "Repairs damaged items. Halves any blast damage the player would receive (multiplicative if player holds multiple items imbued with this gem).",
+	"item.tearsofgaia.gem_earth.usage_2_tetra": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued after Soulbound enchantment is used up (as if the item reverted to level 1).",
+	"item.tearsofgaia.gem_fire.usage_1_tetra": "Items imbued with this tear do not expire in world. When striking with it, item has a chance to inflict double damage.",
+	"item.tearsofgaia.gem_air.usage_1_tetra": "Items imbued with this tear do not expire in world and will not fall into void. If dropped above void, they will float until player picks them up.",
+	"item.tearsofgaia.gem_fire.usage_2_tetra": "Fire immunity bestowed upon player when needed, at a heavy cost of item durability.",
+	"item.tearsofgaia.gem_air.usage_2_tetra": "Acts as totem of undying when needed. Another gem may be imbued after totem activation (as if the item reverted to level 1).",
+
 	"tearsofgaia.message.tinkersconstruct": "You can not imbue a tear gem into a Tinker's tool.",
 	"tearsofgaia.message.line2": "That would be way too much.",
+	"tearsofgaia.message.poisondenied": "Poison resisted thanks to %s.",
+	"tearsofgaia.message.witherdenied": "Withering resisted thanks to %s.",
 
 	"item.tearsofgaia.gem_water_level2": "Tear of Gaia",
 	"item.tearsofgaia.gem_air_level2": "Tear of Gaia",

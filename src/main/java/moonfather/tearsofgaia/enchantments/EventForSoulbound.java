@@ -1,6 +1,6 @@
 package moonfather.tearsofgaia.enchantments;
 
-import moonfather.tearsofgaia.RegistryManager;
+import moonfather.tearsofgaia.integration.IntegrationTetra;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.ItemEntity;
@@ -47,7 +47,7 @@ public class EventForSoulbound
 			while (i.hasNext())
 			{
 				ItemEntity ei = (ItemEntity) i.next();
-				if (EnchantmentHelper.getItemEnchantmentLevel(EnchantmentSoulbound.GetInstance(), ei.getItem()) > 0)
+				if (IsItemSoulbound(ei))
 				{
 					CompoundNBT t = ei.getItem().getOrCreateTagElement("Soulbound_temp");
 					String itemListId = t.getString("inv");
@@ -77,6 +77,18 @@ public class EventForSoulbound
 
 
 
+	private static boolean IsItemSoulbound(ItemEntity ei)
+	{
+		return IsItemSoulbound(ei.getItem());
+	}
+
+	private static boolean IsItemSoulbound(ItemStack item)
+	{
+		return EnchantmentHelper.getItemEnchantmentLevel(EnchantmentSoulbound.GetInstance(), item) > 0 || IntegrationTetra.IsASoulboundTool(item);
+	}
+
+
+
 	@SubscribeEvent
 	public static void OnDeath(LivingDeathEvent event)
 	{
@@ -91,11 +103,9 @@ public class EventForSoulbound
 
 	private static void OnDeathInternal(NonNullList<ItemStack> itemList, String itemListId)
 	{
-		int level = 0;
 		for (int i = 0; i < itemList.size(); i++)
 		{
-			level = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentSoulbound.GetInstance(), itemList.get(i));
-			if (level > 0)
+			if (IsItemSoulbound(itemList.get(i)))
 			{
 				CompoundNBT t = itemList.get(i).getOrCreateTagElement("Soulbound_temp");
 				t.putString("inv", itemListId);
@@ -108,11 +118,9 @@ public class EventForSoulbound
 
 	private static void OnClonePlayerInternal(NonNullList<ItemStack> oldInventory, NonNullList<ItemStack> newInventory)
 	{
-		int level = 0;
 		for (int i = 0; i < oldInventory.size(); i++)
 		{
-			level = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentSoulbound.GetInstance(), oldInventory.get(i));
-			if (level > 0)
+			if (IsItemSoulbound(oldInventory.get(i)))
 			{
 				ItemStack itemToReturn = oldInventory.get(i).copy();
 				ReduceLevelOfSoulbound(itemToReturn);
@@ -124,6 +132,18 @@ public class EventForSoulbound
 
 
 	private static void ReduceLevelOfSoulbound(ItemStack itemToReturn)
+	{
+		if (itemToReturn.getItem().getRegistryName().getNamespace().equals("tetra"))
+		{
+			IntegrationTetra.ReduceLevelOfSoulbound(itemToReturn);
+		}
+		else
+		{
+			ReduceLevelOfSoulboundInternal(itemToReturn);
+		}
+	}
+
+	private static void ReduceLevelOfSoulboundInternal(ItemStack itemToReturn)
 	{
 		ListNBT nbttaglist = itemToReturn.getEnchantmentTags();
 		for (int i = 0; i < nbttaglist.size(); ++i)

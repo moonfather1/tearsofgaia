@@ -71,13 +71,7 @@ public class ElementalHelper
 
 	public static int GetTempTooltipTime(ItemStack stack)
 	{
-		if (stack.isEmpty() || stack.getTag() == null || !stack.getTag().contains(Constants.TAG_KEY_TTT_TIME))
-		{
-		//	System.out.println("---- GetTempTooltipTime " + stack.hashCode() + "->0");
-			return 0;
-		}
-		//System.out.println("---- GetTempTooltipTime " + stack.hashCode() + "->" + stack.getTagCompound().getInteger(Constants.TAG_KEY_TTT_TIME));
-		return stack.getTag().getInt(Constants.TAG_KEY_TTT_TIME);
+		return GetNamedIntValue(stack, Constants.TAG_KEY_TTT_TIME);
 	}
 
 
@@ -118,5 +112,25 @@ public class ElementalHelper
 	public static void ReduceAirLevelTo1(ItemStack stack)
 	{
 		stack.getOrCreateTag().putInt(Constants.TAG_KEY_LEVEL, 1);
+	}
+
+
+
+	public static int GetNamedIntValue(ItemStack stack, String tagName)
+	{
+		if (stack.isEmpty() || stack.getTag() == null || !stack.getTag().contains(tagName))
+		{
+			return 0;
+		}
+		return stack.getTag().getInt(tagName);
+	}
+
+	public static void PutNamedIntValue(ItemStack stack, String tagName, int value)
+	{
+		if (stack.isEmpty())
+		{
+			return;
+		}
+		stack.getOrCreateTag().putInt(tagName, value);
 	}
 }
