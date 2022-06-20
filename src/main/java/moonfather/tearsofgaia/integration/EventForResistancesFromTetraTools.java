@@ -190,7 +190,6 @@ public class EventForResistancesFromTetraTools
 	{
 		if (event.getSource().isExplosion() && ! event.getEntity().level.isClientSide)
 		{
-			System.out.println("!!!   blast dmg==" + event.getAmount());
 			if (CheckItemsForElementalItem(event.getEntityLiving().getMainHandItem(), "water", 2))
 			{
 				event.setAmount(event.getAmount() / 2); //beneficial rounding. don't care really.
@@ -206,7 +205,6 @@ public class EventForResistancesFromTetraTools
 					event.setAmount(event.getAmount() / 2); //beneficial rounding. don't care really.
 				}
 			}
-			System.out.println("!!!---blast dmg==" + event.getAmount());
 		}
 	}
 }

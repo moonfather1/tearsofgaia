@@ -1,17 +1,11 @@
 package moonfather.tearsofgaia.items;
 
-import moonfather.tearsofgaia.forging.ElementalHelper;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.*;
-import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ItemGem extends Item
@@ -22,8 +16,10 @@ public class ItemGem extends Item
 		this.element = element;
 		this.level = level;
 		this.subtitle1 = ItemGem.GetSubtitleLine1Text(element, level);
-		this.subtitle2 = new TranslationTextComponent("item.tearsofgaia.gem_all.subtitle2");
-		this.subtitle2B = new TranslationTextComponent(String.format("item.tearsofgaia.gem_%s.usage_%d", this.element, this.level));
+		this.subtitle2Basic = new TranslationTextComponent("item.tearsofgaia.gem_all.subtitle2");
+		this.subtitle2Usage = new TranslationTextComponent(String.format("item.tearsofgaia.gem_%s.usage_%d", this.element, this.level)).withStyle(TextFormatting.GRAY);
+		this.subtitle2UsageTetra = new TranslationTextComponent(String.format("item.tearsofgaia.gem_%s.usage_%d_tetra", this.element, this.level)).withStyle(TextFormatting.GRAY);
+		this.subtitle2Sep = new StringTextComponent(" ");
 	}
 
 	private static Properties GetProperties(String element)
@@ -45,30 +41,9 @@ public class ItemGem extends Item
 
 	private String element = "none";
 	private int level = 1;
-	private ITextComponent subtitle1, subtitle2, subtitle2B;
+	private ITextComponent subtitle1, subtitle2Basic, subtitle2Usage, subtitle2UsageTetra, subtitle2Sep;
 
-	@Override
-	public void appendHoverText(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag advanced)
-	{
-		list.add(1, this.subtitle1);
-		int tempTooltipTime = ElementalHelper.GetTempTooltipTime(itemStack);
-		if (tempTooltipTime == 0)
-		{
-			list.add(2, new StringTextComponent(" "));
-			list.add(3, this.subtitle2);
-		}
-		else
-		{
-			if (tempTooltipTime > 495 || tempTooltipTime < 6)
-			{
-				//System.out.println("~~~~~~~~~~ tempTooltipTime==" + tempTooltipTime);
-			}
-			list.add(new StringTextComponent(" "));
-			list.add(this.subtitle2B);
-			ElementalHelper.UpdateTempTooltipTime(itemStack);
-		}
-		super.appendHoverText(itemStack, world, list, advanced);
-	}
+
 
 	private static ITextComponent PrepareSubtitleLine1Text(String element, int level)
 	{
@@ -106,6 +81,19 @@ public class ItemGem extends Item
 			ItemGem.subtitleLine1.put("fire2", ItemGem.PrepareSubtitleLine1Text("fire", 2));
 		}
 		return ItemGem.subtitleLine1.get(element + level);
+	}
+
+
+	public ITextComponent GetLoreSeparator()
+	{
+		return this.subtitle2Sep;
+	}
+
+	public ITextComponent GetLoreText(boolean extended, boolean alternate)
+	{
+		if (extended && ! alternate) return this.subtitle2Usage;
+		if (extended && alternate) return this.subtitle2UsageTetra;
+		return this.subtitle2Basic;
 	}
 
 	public String GetElement()

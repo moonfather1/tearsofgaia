@@ -69,42 +69,6 @@ public class ElementalHelper
 
 
 
-	public static int GetTempTooltipTime(ItemStack stack)
-	{
-		return GetNamedIntValue(stack, Constants.TAG_KEY_TTT_TIME);
-	}
-
-
-
-	public static void UpdateTempTooltipTime(ItemStack stack)
-	{
-		if (stack.isEmpty())
-		{
-			//System.out.println("---- UpdateTempTooltipTime " + stack.hashCode() + ",NIL");
-			return;
-		}
-		int current = GetTempTooltipTime(stack);
-		if (current > 1)
-		{
-			stack.getOrCreateTag().putInt(Constants.TAG_KEY_TTT_TIME, current - 1);
-		}
-		else
-		{
-			stack.getOrCreateTag().remove(Constants.TAG_KEY_TTT_TIME);
-		}
-		//int current2 = stack.getTag().getInt(Constants.TAG_KEY_TTT_TIME);
-		//System.out.println("---- UpdateTempTooltipTime " + stack.hashCode() + ":    " + current + "->" + newTime + "   ====>" + current2);
-	}
-
-
-
-	public static void SetStartingTempTooltipTime(ItemStack stack)
-	{
-		stack.getOrCreateTag().putInt(Constants.TAG_KEY_TTT_TIME, 500);   // tried 100; was about 1s while i expected 5s.
-	}
-
-
-
 	public static int GetTearLevel(ItemStack gem) {	return ((ItemGem) gem.getItem()).GetLevel();  }
 
 

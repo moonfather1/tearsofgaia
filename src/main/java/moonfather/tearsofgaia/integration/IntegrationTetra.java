@@ -22,9 +22,15 @@ public class IntegrationTetra
 
 
 
+	public static boolean IsTetraTool(ItemStack tool)
+	{
+		return tool.getItem().getRegistryName().getNamespace().equals("tetra");
+	}
+
+
+
 	public static void ReduceLevelOfSoulbound(ItemStack tool)
 	{
-		System.out.println("~~~ tetra ReduceLevelOfSoulbound");
 		int level = ElementalHelper.GetNamedIntValue(tool, AnvilHelperTetra.TAG_KEY_SOULBOUND_LEVEL);
 		ElementalHelper.PutNamedIntValue(tool, AnvilHelperTetra.TAG_KEY_SOULBOUND_LEVEL, level - 1);
 	}

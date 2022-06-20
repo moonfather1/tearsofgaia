@@ -1,24 +1,9 @@
 package moonfather.tearsofgaia.forging;
 
-import moonfather.tearsofgaia.Constants;
-import moonfather.tearsofgaia.RegistryManager;
-import moonfather.tearsofgaia.enchantments.EnchantmentEasyRepair;
-import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
 import moonfather.tearsofgaia.integration.IntegrationTinkersTools;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 
 
@@ -33,11 +18,13 @@ public class EventForAnvil
 
 		if (ElementalHelper.IsTear(right))
 		{
-			ElementalHelper.SetStartingTempTooltipTime(right);
+			//ElementalHelper.SetStartingTempTooltipTime(right);
+			ExtendedTooltipManager.ActivateExtendedTooltip(right, event.getPlayer(), left);
 		}
 		if (ElementalHelper.IsTear(left))
 		{
-			ElementalHelper.SetStartingTempTooltipTime(left);
+			//ElementalHelper.SetStartingTempTooltipTime(left);
+			ExtendedTooltipManager.ActivateExtendedTooltip(left, event.getPlayer(), right);
 		}
 
 		if (left.isEmpty() || right.isEmpty())

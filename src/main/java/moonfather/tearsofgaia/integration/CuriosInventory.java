@@ -13,26 +13,6 @@ import java.util.List;
 
 public class CuriosInventory
 {
-	public static void test(LivingEntity e)
-	{
-		CuriosApi.getCuriosHelper().getCuriosHandler(e).ifPresent(
-				(ih)->
-				{
-					for (ICurioStacksHandler sh : ih.getCurios().values())
-					{
-						int slotCount = sh.getSlots();
-						for (int i = 0; i < slotCount; i++)
-						{
-							System.out.println("~~~  ~~  item " + i + " :::   " + sh.getStacks().getStackInSlot(i));
-						}
-					}
-				}
-		);
-		System.out.println("~~~  ~~  -- ");
-	}
-
-
-
 	public static void PutItemBack(PlayerEntity player, ItemStack item, String location, int slot)
 	{
 		CuriosApi.getCuriosHelper().getCuriosHandler(player).ifPresent(

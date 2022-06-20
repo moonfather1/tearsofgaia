@@ -1,8 +1,5 @@
 package moonfather.tearsofgaia.forging;
 
-import moonfather.tearsofgaia.Constants;
-import moonfather.tearsofgaia.ModTears;
-import moonfather.tearsofgaia.integration.AnvilHelperTetra;
 import moonfather.tearsofgaia.integration.IntegrationTetra;
 import moonfather.tearsofgaia.items.ItemGem;
 import net.minecraft.item.Items;
@@ -17,6 +14,25 @@ public class EventForTooltips
 	@SubscribeEvent
 	public static void OnItemTooltip(ItemTooltipEvent event)
 	{
+		if (ElementalHelper.IsTear(event.getItemStack()))
+		{
+			ItemGem gem = (ItemGem) event.getItemStack().getItem();
+			event.getToolTip().add(1, ItemGem.GetSubtitleLine1Text(gem.GetElement(), gem.GetLevel()));
+			if (ExtendedTooltipManager.ShouldShowExtendedTooltip(event.getItemStack(), event.getPlayer()))
+			{
+				boolean tetra = event.getItemStack().hasTag() && event.getItemStack().getTag().contains(ExtendedTooltipManager.TOOLTIP_IS_TETRA);
+				event.getToolTip().add(2, gem.GetLoreSeparator());
+				event.getToolTip().add(3, gem.GetLoreText(true, tetra));
+			}
+			else
+			{
+				event.getToolTip().add(2, gem.GetLoreSeparator());
+				event.getToolTip().add(3, gem.GetLoreText(false, false));
+			}
+		}
+
+		/////////////////////////////
+
 		String element = ElementalHelper.GetItemElement(event.getItemStack());
 		if (element != null)
 		{

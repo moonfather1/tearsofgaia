@@ -6,7 +6,7 @@ license="gpl-3.0"
 [[mods]] #mandatory
 modId="tearsofgaia"
 
-version="0.92"
+version="0.93"
 displayName="Tears of Gaia" #mandatory
 
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
