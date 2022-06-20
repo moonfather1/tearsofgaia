@@ -2,11 +2,11 @@ package moonfather.tearsofgaia.enchantments;
 
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.RegistryManager;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class EnchantmentSoulbound extends Enchantment
 {
@@ -15,7 +15,7 @@ public class EnchantmentSoulbound extends Enchantment
 
 	public EnchantmentSoulbound()
 	{
-		super(Rarity.VERY_RARE, EnchantmentType.BREAKABLE, EquipmentSlotType.values());
+		super(Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlot.values());
 	}
 
 	/**

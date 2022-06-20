@@ -1,9 +1,11 @@
 package moonfather.tearsofgaia.items;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Rarity;
-import net.minecraft.util.text.*;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +18,10 @@ public class ItemGem extends Item
 		this.element = element;
 		this.level = level;
 		this.subtitle1 = ItemGem.GetSubtitleLine1Text(element, level);
-		this.subtitle2Basic = new TranslationTextComponent("item.tearsofgaia.gem_all.subtitle2");
-		this.subtitle2Usage = new TranslationTextComponent(String.format("item.tearsofgaia.gem_%s.usage_%d", this.element, this.level)).withStyle(TextFormatting.GRAY);
-		this.subtitle2UsageTetra = new TranslationTextComponent(String.format("item.tearsofgaia.gem_%s.usage_%d_tetra", this.element, this.level)).withStyle(TextFormatting.GRAY);
-		this.subtitle2Sep = new StringTextComponent(" ");
+		this.subtitle2Basic = new TranslatableComponent("item.tearsofgaia.gem_all.subtitle2").withStyle(ChatFormatting.GRAY);
+		this.subtitle2Usage = new TranslatableComponent(String.format("item.tearsofgaia.gem_%s.usage_%d", this.element, this.level)).withStyle(ChatFormatting.GRAY);
+		this.subtitle2UsageTetra = new TranslatableComponent(String.format("item.tearsofgaia.gem_%s.usage_%d_tetra", this.element, this.level)).withStyle(ChatFormatting.GRAY);
+		this.subtitle2Sep = new TextComponent(" ");
 	}
 
 	private static Properties GetProperties(String element)
@@ -27,7 +29,7 @@ public class ItemGem extends Item
 		Item.Properties properties = new Properties();
 		properties.setNoRepair();
 		properties.rarity(Rarity.RARE);
-		properties.tab(ItemGroup.TAB_MISC);
+		properties.tab(CreativeModeTab.TAB_MISC);
 		if (element.equals("fire"))
 		{
 			properties.fireResistant();
@@ -37,37 +39,37 @@ public class ItemGem extends Item
 
 
 
-	private static Map<String, ITextComponent> subtitleLine1 = new HashMap<String, ITextComponent>();
+	private static Map<String, Component> subtitleLine1 = new HashMap<String, Component>();
 
 	private String element = "none";
 	private int level = 1;
-	private ITextComponent subtitle1, subtitle2Basic, subtitle2Usage, subtitle2UsageTetra, subtitle2Sep;
+	private Component subtitle1, subtitle2Basic, subtitle2Usage, subtitle2UsageTetra, subtitle2Sep;
 
 
 
-	private static ITextComponent PrepareSubtitleLine1Text(String element, int level)
+	private static Component PrepareSubtitleLine1Text(String element, int level)
 	{
-		Color color = Color.fromLegacyFormat(TextFormatting.DARK_RED);
+		TextColor color = TextColor.fromLegacyFormat(ChatFormatting.DARK_RED);
 		switch (element)
 		{
-			case "earth": color = Color.fromRgb(0x996633); break;
-			case "water": color = Color.fromRgb(0x0088cc); break;
-			case "fire": color = Color.fromRgb(0xff8c1a); break;
-			case "air": color = Color.fromRgb(0xeeeeff); break;
+			case "earth": color = TextColor.fromRgb(0x996633); break;
+			case "water": color = TextColor.fromRgb(0x0088cc); break;
+			case "fire": color = TextColor.fromRgb(0xff8c1a); break;
+			case "air": color = TextColor.fromRgb(0xeeeeff); break;
 		}
-		StringTextComponent result = new StringTextComponent("");
+		TextComponent result = new TextComponent("");
 		String subtitle1Key = String.format("item.tearsofgaia.gem_%s.subtitle", element);
-		TranslationTextComponent elementText = new TranslationTextComponent(subtitle1Key);
+		TranslatableComponent elementText = new TranslatableComponent(subtitle1Key);
 		elementText.withStyle(Style.EMPTY.withColor(color));
 		result.append(elementText);
 		if (level > 1)
 		{
-			result.append(new TranslationTextComponent("item.tearsofgaia.level_suffix", " ", level));
+			result.append(new TranslatableComponent("item.tearsofgaia.level_suffix", " ", level));
 		}
 		return result;
 	}
 
-	public static ITextComponent GetSubtitleLine1Text(String element, int level)
+	public static Component GetSubtitleLine1Text(String element, int level)
 	{
 		if (ItemGem.subtitleLine1.size() == 0)
 		{
@@ -84,12 +86,13 @@ public class ItemGem extends Item
 	}
 
 
-	public ITextComponent GetLoreSeparator()
+
+	public Component GetLoreSeparator()
 	{
 		return this.subtitle2Sep;
 	}
 
-	public ITextComponent GetLoreText(boolean extended, boolean alternate)
+	public Component GetLoreText(boolean extended, boolean alternate)
 	{
 		if (extended && ! alternate) return this.subtitle2Usage;
 		if (extended && alternate) return this.subtitle2UsageTetra;

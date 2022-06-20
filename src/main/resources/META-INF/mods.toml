@@ -1,32 +1,33 @@
 modLoader="javafml" #mandatory
-loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 license="gpl-3.0"
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+#issueTrackerURL="https://github.com/moonfather1/tearsofgaia" #optional
+
 
 [[mods]] #mandatory
-modId="tearsofgaia"
-
-version="0.93"
+modId="tearsofgaia" #mandatory
+version="0.1" #mandatory
 displayName="Tears of Gaia" #mandatory
+
 
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 logoFile="logo.png" #optional
-#credits="Thanks for this example mod goes to Java"
-authors="MoonFather"
+credits="Thanks for this example mod goes to Java" #optional
+authors="MoonFather" #optional
 
 description='''Adds four gems that can be used on an anvil to strengthen your tools. 
 The mod is intended to add some tool diversity by using what you have (gems are rare), not the same best set always. '''
 
-[[dependencies.tearsofgaia]]
+[[dependencies.tearsofgaia]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[36,)" #mandatory
+    versionRange="[40,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.tearsofgaia]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,1.17)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"

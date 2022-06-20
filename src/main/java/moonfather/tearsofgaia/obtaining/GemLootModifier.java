@@ -4,18 +4,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.RegistryManager;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import java.util.List;
 
 public class GemLootModifier extends LootModifier
 {
-	public GemLootModifier(ILootCondition[] conditionsIn)
+	public GemLootModifier(LootItemCondition[] conditionsIn)
 	{
 		super(conditionsIn);
 	}
@@ -71,7 +71,7 @@ public class GemLootModifier extends LootModifier
 	public static class Serializer extends GlobalLootModifierSerializer<GemLootModifier>
 	{
 		@Override
-		public GemLootModifier read(ResourceLocation name, JsonObject json, ILootCondition[] conditionsIn)
+		public GemLootModifier read(ResourceLocation name, JsonObject json, LootItemCondition[] conditionsIn)
 		{
 			return new GemLootModifier(conditionsIn);
 		}

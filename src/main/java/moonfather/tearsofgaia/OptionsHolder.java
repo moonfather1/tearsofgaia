@@ -8,17 +8,23 @@ public class OptionsHolder
 {
 	public static class Common
 	{
-		private static final int defaultNumberOfTearsInA1000DiamondBlocks = 50;
+		private static final int defaultNumberOfTearsInA1000DiamondBlocks = 40;
 		private static final boolean defaultShouldReplaceAGem = true;
 		private static final boolean defaultLevelTwoGemsEnabled = true;
 		private static final boolean defaultSoulboundBookEnabledInWorld = true;
 		private static final boolean defaultRepairBookEnabledInWorld = true;
+		private static final int defaultTetraPercentageChanceForCriticalStrike = 10;
+		private static final int defaultTetraPercentageChanceResistingPoison = 75;
+		private static final int defaultTetraPercentageChanceResistingWither = 75;
 
 		public final ConfigValue<Integer> NumberOfTearsInA1000DiamondBlocks;
 		public final ConfigValue<Boolean> ShouldReplaceAGem;
 		public final ConfigValue<Boolean> LevelTwoGemsEnabled;
 		public final ConfigValue<Boolean> SoulboundBookEnabledInWorld;
 		public final ConfigValue<Boolean> RepairBookEnabledInWorld;
+		public final ConfigValue<Integer> TetraPercentageChanceForCriticalStrike;
+		public final ConfigValue<Integer> TetraPercentageChanceResistingPoison;
+		public final ConfigValue<Integer> TetraPercentageChanceResistingWither;
 
 		public Common(ForgeConfigSpec.Builder builder)
 		{
@@ -32,6 +38,14 @@ public class OptionsHolder
 					.define("Enchanted books with Soulbound available", defaultSoulboundBookEnabledInWorld);
 			this.RepairBookEnabledInWorld = builder.comment("If set to true, enchanted books with Smith's Triuph enchantment (limiting anvil cost) can be found in fishing loot or bought from librarians or found in chests. If set to false, only mods can put the book into loot or make it otherwise available to players. This mod bestows soulbound enchantment through water gem.").worldRestart()
 					.define("Enchanted books with Smith's Triumph available", defaultRepairBookEnabledInWorld);
+			builder.push("Tetra compatibility");
+			this.TetraPercentageChanceForCriticalStrike = builder.comment("Tetra tools get some alternative abilities. This is a percentage chance for a weapon to do double damage.")
+					.defineInRange("Double damage chance (percentage)", defaultTetraPercentageChanceForCriticalStrike, 0, 100);
+			this.TetraPercentageChanceResistingPoison = builder.comment("Tetra tools get some alternative abilities. This is a percentage chance for a tool to block potion effect.")
+					.defineInRange("Chance to block poison (percentage)", defaultTetraPercentageChanceResistingPoison, 0, 100);
+			this.TetraPercentageChanceResistingWither = builder.comment("Tetra tools get some alternative abilities. This is a percentage chance for a tool to block wither effect.")
+					.defineInRange("Chance to block wither (percentage)", defaultTetraPercentageChanceResistingWither, 0, 100);
+			builder.pop();
 		}
 	}
 

@@ -3,20 +3,21 @@ package moonfather.tearsofgaia;
 import moonfather.tearsofgaia.enchantments.EnchantmentEasyRepair;
 import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
 import moonfather.tearsofgaia.items.ItemGem;
+import moonfather.tearsofgaia.items.OptionalRecipeCondition;
 import moonfather.tearsofgaia.obtaining.GemLootModifier;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class RegistryManager
 {
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 	private static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Constants.MODID);
-	private static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, Constants.MODID);
+	private static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, Constants.MODID);
 
 	public static void Init()
 	{

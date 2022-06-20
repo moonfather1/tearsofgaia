@@ -2,11 +2,11 @@ package moonfather.tearsofgaia.enchantments;
 
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.RegistryManager;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class EnchantmentEasyRepair extends Enchantment
 {
@@ -16,7 +16,7 @@ public class EnchantmentEasyRepair extends Enchantment
 
 	public EnchantmentEasyRepair()
 	{
-		super(Rarity.RARE, EnchantmentType.BREAKABLE, EquipmentSlotType.values());
+		super(Rarity.RARE, EnchantmentCategory.BREAKABLE, EquipmentSlot.values());
 	}
 
 
@@ -64,8 +64,8 @@ public class EnchantmentEasyRepair extends Enchantment
 		return stack.getItemEnchantability() > 0
 			&& (
 				! (stack.getItem() instanceof TieredItem || stack.getItem() instanceof ArmorItem)
-				|| (stack.getItem() instanceof TieredItem && (((TieredItem) stack.getItem()).getTier().getLevel() > 1 || ((TieredItem) stack.getItem()).getTier().equals(ItemTier.GOLD)))
-				|| (stack.getItem() instanceof ArmorItem && ! ((ArmorItem) stack.getItem()).getMaterial().equals(ArmorMaterial.LEATHER))
+				|| (stack.getItem() instanceof TieredItem && (((TieredItem) stack.getItem()).getTier().getLevel() > 1 || ((TieredItem) stack.getItem()).getTier().equals(Tiers.GOLD)))
+				|| (stack.getItem() instanceof ArmorItem && ! ((ArmorItem) stack.getItem()).getMaterial().equals(ArmorMaterials.LEATHER))
 			);
 	}
 
