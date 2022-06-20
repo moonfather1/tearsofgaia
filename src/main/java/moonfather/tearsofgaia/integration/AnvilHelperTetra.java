@@ -105,6 +105,6 @@ public class AnvilHelperTetra extends AnvilHelperVanilla
 		}
 		event.setOutput(output);
 		event.setMaterialCost(1);
-		event.setCost(output.getDisplayName().equals(stack.getDisplayName()) ? 10 : 11);
+		event.setCost(output.getDisplayName().getString().equals(stack.getDisplayName().getString()) ? 10 : 11);
 	}
 }

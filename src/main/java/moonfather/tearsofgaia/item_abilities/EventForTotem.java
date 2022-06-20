@@ -1,6 +1,7 @@
 package moonfather.tearsofgaia.item_abilities;
 
 import moonfather.tearsofgaia.forging.ElementalHelper;
+import moonfather.tearsofgaia.integration.CuriosInventory;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -13,7 +14,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class EventForTotem
@@ -42,6 +45,10 @@ public class EventForTotem
 		{
 			found = LookForAirLevel2(player.inventory.items, 9);
 		}
+		if (found == ItemStack.EMPTY && ModList.get().isLoaded("curios"))
+		{
+			found = LookForAirLevel2(CuriosInventory.GetFlatList(player));
+		}
 		if (found == ItemStack.EMPTY)
 		{
 			return;
@@ -68,21 +75,21 @@ public class EventForTotem
 
 
 
-	private static ItemStack LookForAirLevel2(NonNullList<ItemStack> inventory)
+	private static ItemStack LookForAirLevel2(List<ItemStack> inventory)
 	{
 		return LookForAirLevel2(inventory, 1000);
 	}
 
 
 
-	private static ItemStack LookForAirLevel2(NonNullList<ItemStack> inventory, int numberOfItemsToCheck)
+	private static ItemStack LookForAirLevel2(List<ItemStack> inventory, int numberOfItemsToCheck)
 	{
 		return LookForElementLevel2(inventory, numberOfItemsToCheck, "air");
 	}
 
 
 
-	public static ItemStack LookForElementLevel2(NonNullList<ItemStack> inventory, int numberOfItemsToCheck, String element)
+	public static ItemStack LookForElementLevel2(List<ItemStack> inventory, int numberOfItemsToCheck, String element)
 	{
 		ItemStack current;
 		for (int i = 0; i < inventory.size() && i < numberOfItemsToCheck; i++)

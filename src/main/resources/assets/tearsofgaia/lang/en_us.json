@@ -19,7 +19,7 @@
 	"item.tearsofgaia.gem_water.usage_1_tetra": "Items imbued with this tear do not expire in world. While held in hand or worn, item has a chance to negate incoming wither effect, at the cost of durability.",
 	"item.tearsofgaia.gem_earth.usage_1_tetra": "Items imbued with this tear do not expire in world. While held in hand or worn, item has a chance to negate incoming poison effect, at the cost of durability.",
 	"item.tearsofgaia.gem_water.usage_2_tetra": "Repairs damaged items. Halves any blast damage the player would receive (multiplicative if player holds multiple items imbued with this gem).",
-	"item.tearsofgaia.gem_earth.usage_2_tetra": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued after Soulbound enchantment is used up (as if the item reverted to level 1).",
+	"item.tearsofgaia.gem_earth.usage_2_tetra": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued to increase the level of Soulbound enchantment.",
 	"item.tearsofgaia.gem_fire.usage_1_tetra": "Items imbued with this tear do not expire in world. When striking with it, item has a chance to inflict double damage.",
 	"item.tearsofgaia.gem_air.usage_1_tetra": "Items imbued with this tear do not expire in world and will not fall into void. If dropped above void, they will float until player picks them up.",
 	"item.tearsofgaia.gem_fire.usage_2_tetra": "Fire immunity bestowed upon player when needed, at a heavy cost of item durability.",
@@ -39,10 +39,10 @@
 	"item.tearsofgaia.gem_water.usage_2": "Repairs damaged items and removes curses. Increases levels of all enchantments.",
 	"item.tearsofgaia.gem_fire.usage_2": "Fire immunity bestowed upon player when needed, at a heavy cost of item durability.",
 	"item.tearsofgaia.gem_air.usage_2": "Acts as totem of undying when needed. Another gem may be imbued after totem activation (as if the item reverted to level 1).",
-	"item.tearsofgaia.gem_earth.usage_2": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued after Soulbound enchantment is used up (as if the item reverted to level 1).",
+	"item.tearsofgaia.gem_earth.usage_2": "Increases the level of Soulbound enchantment (item stays in inventory on player death; enchantment level decreased). Another gem may be imbued to increase the level of Soulbound enchantment.",
 
 	"enchantment.tearsofgaia.soulbound_mf": "Soulbound",
 	"enchantment.tearsofgaia.repair_mf": "Smith's Triumph",
 	"enchantment.tearsofgaia.soulbound_mf.desc": "Item stays in inventory on player death. After that happens, enchantment level gets decreased.",
-	"enchantment.tearsofgaia.repair_mf.desc": "Repair cost on anvil is capped when repairing using main material; higher enchantment levels reduce cap."
+	"enchantment.tearsofgaia.repair_mf.desc": "Repair cost on anvil is capped when repairing using main material (ingots/gems); higher enchantment levels reduce cap."
 }

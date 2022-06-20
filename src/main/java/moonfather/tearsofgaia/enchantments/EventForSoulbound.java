@@ -1,5 +1,6 @@
 package moonfather.tearsofgaia.enchantments;
 
+import moonfather.tearsofgaia.integration.CuriosInventory;
 import moonfather.tearsofgaia.integration.IntegrationTetra;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.Iterator;
@@ -64,6 +66,12 @@ public class EventForSoulbound
 					{
 						player.inventory.offhand.set(slot, ei.getItem().copy());
 					}
+					else if (itemListId.startsWith("curios"))
+					{
+						ItemStack itemToPutBack = ei.getItem().copy();
+						ReduceLevelOfSoulbound(itemToPutBack); // because we can't do this in clone event
+						CuriosInventory.PutItemBack(player, itemToPutBack, itemListId, slot);
+					}
 					else
 					{
 						continue;
@@ -82,7 +90,7 @@ public class EventForSoulbound
 		return IsItemSoulbound(ei.getItem());
 	}
 
-	private static boolean IsItemSoulbound(ItemStack item)
+	public static boolean IsItemSoulbound(ItemStack item)
 	{
 		return EnchantmentHelper.getItemEnchantmentLevel(EnchantmentSoulbound.GetInstance(), item) > 0 || IntegrationTetra.IsASoulboundTool(item);
 	}
@@ -98,6 +106,10 @@ public class EventForSoulbound
 			OnDeathInternal(player.inventory.armor, "armor");
 			OnDeathInternal(player.inventory.items, "main");
 			OnDeathInternal(player.inventory.offhand, "offh");
+			if (ModList.get().isLoaded("curios"))
+			{
+				CuriosInventory.MarkItemsWithLocations(player);
+			}
 		}
 	}
 
@@ -131,7 +143,7 @@ public class EventForSoulbound
 
 
 
-	private static void ReduceLevelOfSoulbound(ItemStack itemToReturn)
+	public static void ReduceLevelOfSoulbound(ItemStack itemToReturn)
 	{
 		if (itemToReturn.getItem().getRegistryName().getNamespace().equals("tetra"))
 		{

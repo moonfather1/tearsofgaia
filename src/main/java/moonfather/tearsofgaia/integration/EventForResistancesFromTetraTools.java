@@ -13,7 +13,10 @@ import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Random;
 
 @Mod.EventBusSubscriber
 public class EventForResistancesFromTetraTools
@@ -27,26 +30,50 @@ public class EventForResistancesFromTetraTools
 			if (! event.getEntity().level.isClientSide)
 			{
 				ItemStack tool = event.getEntityLiving().getMainHandItem();
-				if (CheckItemsForElementalItem(tool, "earth") && tool.getDamageValue() < tool.getMaxDamage() * 0.95)
+				if (CheckItemsForElementalItem(tool, "earth") && (tool.getDamageValue() == 0 || tool.getDamageValue() < tool.getMaxDamage() * 0.95))
 				{
-					DenyEffect(event, tool, "poison");
-					tool.setDamageValue(tool.getDamageValue() + Math.min((int)(tool.getMaxDamage() * 0.02), 15));
-					return;
+					if (RollSucceeded("poison"))
+					{
+						DenyEffect(event, tool, "poison");
+						tool.setDamageValue(tool.getDamageValue() + Math.min((int) (tool.getMaxDamage() * 0.02), 15));
+						return;
+					}
 				}
 				tool = event.getEntityLiving().getOffhandItem();
-				if (CheckItemsForElementalItem(tool, "earth") && tool.getDamageValue() < tool.getMaxDamage() * 0.95)
+				if (CheckItemsForElementalItem(tool, "earth") && (tool.getDamageValue() == 0 || tool.getDamageValue() < tool.getMaxDamage() * 0.95))
 				{
-					DenyEffect(event, tool, "poison");
-					tool.setDamageValue(tool.getDamageValue() + Math.min((int)(tool.getMaxDamage() * 0.02), 15));
-					return;
+					if (RollSucceeded("poison"))
+					{
+						DenyEffect(event, tool, "poison");
+						tool.setDamageValue(tool.getDamageValue() + Math.min((int) (tool.getMaxDamage() * 0.02), 15));
+						return;
+					}
 				}
 				for (ItemStack armor : event.getEntityLiving().getArmorSlots())
 				{
-					if (CheckItemsForElementalItem(armor, "earth") && armor.getDamageValue() < armor.getMaxDamage() * 0.95)
+					if (CheckItemsForElementalItem(armor, "earth") && (armor.getDamageValue() == 0 || armor.getDamageValue() < armor.getMaxDamage() * 0.95))
 					{
-						DenyEffect(event, armor, "poison");
-						armor.setDamageValue(armor.getDamageValue() + Math.min((int)(armor.getMaxDamage() * 0.02), 15));
-						return;
+						if (RollSucceeded("poison"))
+						{
+							DenyEffect(event, armor, "poison");
+							armor.setDamageValue(armor.getDamageValue() + Math.min((int) (armor.getMaxDamage() * 0.02), 15));
+							return;
+						}
+					}
+				}
+				if (ModList.get().isLoaded("curios"))
+				{
+					for (ItemStack curio : CuriosInventory.GetFlatList(event.getEntityLiving()))
+					{
+						if (CheckItemsForElementalItem(curio, "earth") && (curio.getDamageValue() == 0 || curio.getDamageValue() < curio.getMaxDamage() * 0.95))
+						{
+							if (RollSucceeded("poison"))
+							{
+								DenyEffect(event, curio, "poison");
+								curio.setDamageValue(curio.getDamageValue() + Math.min((int) (curio.getMaxDamage() * 0.02), 15));
+								return;
+							}
+						}
 					}
 				}
 			}
@@ -57,26 +84,50 @@ public class EventForResistancesFromTetraTools
 			if (! event.getEntity().level.isClientSide)
 			{
 				ItemStack tool = event.getEntityLiving().getMainHandItem();
-				if (CheckItemsForElementalItem(tool, "water") && tool.getDamageValue() < tool.getMaxDamage() * 0.95)
+				if (CheckItemsForElementalItem(tool, "water") && (tool.getDamageValue() == 0 || tool.getDamageValue() < tool.getMaxDamage() * 0.95))
 				{
-					DenyEffect(event, tool, "wither");
-					tool.setDamageValue(tool.getDamageValue() + Math.min((int)(tool.getMaxDamage() * 0.05), 25));
-					return;
+					if (RollSucceeded("wither"))
+					{
+						DenyEffect(event, tool, "wither");
+						tool.setDamageValue(tool.getDamageValue() + Math.min((int) (tool.getMaxDamage() * 0.05), 25));
+						return;
+					}
 				}
 				tool = event.getEntityLiving().getOffhandItem();
-				if (CheckItemsForElementalItem(tool, "water") && tool.getDamageValue() < tool.getMaxDamage() * 0.95)
+				if (CheckItemsForElementalItem(tool, "water") && (tool.getDamageValue() == 0 || tool.getDamageValue() < tool.getMaxDamage() * 0.95))
 				{
-					DenyEffect(event, tool, "wither");
-					tool.setDamageValue(tool.getDamageValue() + Math.min((int)(tool.getMaxDamage() * 0.05), 25));
-					return;
+					if (RollSucceeded("wither"))
+					{
+						DenyEffect(event, tool, "wither");
+						tool.setDamageValue(tool.getDamageValue() + Math.min((int) (tool.getMaxDamage() * 0.05), 25));
+						return;
+					}
 				}
 				for (ItemStack armor : event.getEntityLiving().getArmorSlots())
 				{
-					if (CheckItemsForElementalItem(armor, "water") && armor.getDamageValue() < armor.getMaxDamage() * 0.95)
+					if (CheckItemsForElementalItem(armor, "water") && (armor.getDamageValue() == 0 || armor.getDamageValue() < armor.getMaxDamage() * 0.95))
 					{
-						DenyEffect(event, armor, "wither");
-						armor.setDamageValue(armor.getDamageValue() + Math.min((int)(armor.getMaxDamage() * 0.05), 25));
-						return;
+						if (RollSucceeded("wither"))
+						{
+							DenyEffect(event, armor, "wither");
+							armor.setDamageValue(armor.getDamageValue() + Math.min((int) (armor.getMaxDamage() * 0.05), 25));
+							return;
+						}
+					}
+				}
+				if (ModList.get().isLoaded("curios"))
+				{
+					for (ItemStack curio : CuriosInventory.GetFlatList(event.getEntityLiving()))
+					{
+						if (CheckItemsForElementalItem(curio, "water") && (curio.getDamageValue() == 0 || curio.getDamageValue() < curio.getMaxDamage() * 0.95))
+						{
+							if (RollSucceeded("wither"))
+							{
+								DenyEffect(event, curio, "wither");
+								curio.setDamageValue(curio.getDamageValue() + Math.min((int) (curio.getMaxDamage() * 0.05), 25));
+								return;
+							}
+						}
 					}
 				}
 			}
@@ -87,21 +138,30 @@ public class EventForResistancesFromTetraTools
 
 	private static void DenyEffect(PotionEvent.PotionApplicableEvent event, ItemStack toolFound, String effectName)
 	{
-		int roll = event.getEntity().level.random.nextInt(100);
-		if (roll < 75)
+		if (event.getEntityLiving() instanceof PlayerEntity)
 		{
-			// 75% chance to block
-			if (event.getEntityLiving() instanceof PlayerEntity)
-			{
-				String key = String.format("tearsofgaia.message.%sdenied", effectName);
-				int color = effectName.equals("poison") ? 0x996633 : 0x0088cc; // earth and water
-				((PlayerEntity) event.getEntityLiving()).displayClientMessage(new TranslationTextComponent(key, toolFound.getDisplayName().copy().withStyle(TextFormatting.GOLD).withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))), true);
-			}
-			event.setResult(Event.Result.DENY);
+			String key = String.format("tearsofgaia.message.%sdenied", effectName);
+			int color = effectName.equals("poison") ? 0x996633 : 0x0088cc; // earth and water
+			((PlayerEntity) event.getEntityLiving()).displayClientMessage(new TranslationTextComponent(key, toolFound.getDisplayName().copy().withStyle(TextFormatting.GOLD).withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))), true);
 		}
+		event.setResult(Event.Result.DENY);
 	}
 
-
+	private static boolean RollSucceeded(String type)
+	{
+		int percentLimit = 0;
+		if (type.equals("poison"))
+		{
+			percentLimit = 75;
+		}
+		if (type.equals("wither"))
+		{
+			percentLimit = 75;
+		}
+		// 75% chance to block
+		return random.nextInt(100) < percentLimit;
+	}
+	private static Random random = new Random();
 
 	static boolean CheckItemsForElementalItem(ItemStack item, String element)
 	{

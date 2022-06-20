@@ -12,8 +12,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 //todo: tempTooltipTime needs network
-//todo: tetra: support earth1 on belt or deny on anvil
-//todo: tetra: support earth2 on belt or deny on anvil
+
+////////////////////
+//client item ??              try mine
+//icon is not good
+
 
 @Mod(Constants.MODID)
 public class ModTears
@@ -26,6 +29,8 @@ public class ModTears
         RegistryManager.Init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     }
+
+
 
     private void setup(final FMLCommonSetupEvent event)
     {

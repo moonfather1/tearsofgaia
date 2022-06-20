@@ -39,11 +39,12 @@ public class AnvilHelperVanilla extends AnvilHelper
 		}
 		else if (element.equals("air"))
 		{
-			return  IsEquipableArmorOrShieldOrHorseEquipement(stack);//return stack.getItem().getItemStackLimit(stack) == 1;
+			//used to be IsEquipableArmorOrShieldOrHorseEquipement(stack) but we're now letting anything through
+			return  IsNonStackable(stack);
 		}
 		else if (element.equals("fire"))
 		{
-			return  IsEquipableArmorOrShieldOrHorseEquipement(stack);
+			return  IsNonStackable(stack);
 		}
 		else
 		{
@@ -77,6 +78,11 @@ public class AnvilHelperVanilla extends AnvilHelper
 				return true; // spent soulbound; allow refill
 			}
 			return false; // not imbued to level 1
+		}
+		else if (gemElement.equals("fire"))
+		{
+			// finally something element-dependant
+			return stack.isDamageableItem();
 		}
 		else
 		{
@@ -245,7 +251,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 		}
 		event.setOutput(output);
 		event.setMaterialCost(1);
-		event.setCost(output.getDisplayName().equals(stack.getDisplayName()) ? 10 : 11);
+		event.setCost(output.getDisplayName().getString().equals(stack.getDisplayName().getString()) ? 10 : 11);
 	}
 
 
@@ -265,5 +271,10 @@ public class AnvilHelperVanilla extends AnvilHelper
 			return true;
 		}
 		return false;
+	}
+
+	private static boolean IsNonStackable(ItemStack stack)
+	{
+		return stack.getItem().getItemStackLimit(stack) == 1;
 	}
 }
