@@ -6,7 +6,7 @@ license="gpl-3.0"
 
 [[mods]] #mandatory
 modId="tearsofgaia" #mandatory
-version="0.1" #mandatory
+version="1.00" #mandatory
 displayName="Tears of Gaia" #mandatory
 
 

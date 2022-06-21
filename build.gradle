@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 
-version = '0.1'
+version = '1.00'
 group = 'moonfather.tearsofgaia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'tearsofgaia'
 
@@ -141,6 +141,10 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
     // flatDir {
     //     dir 'libs'
@@ -164,6 +168,7 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1:api")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

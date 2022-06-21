@@ -34,6 +34,12 @@ public class ModTears
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     }
 
+
+    //ok: water2, air2, water1, earth1, fire1, air1, fire2, ench2, ench1
+
+    //test: earth2
+    //test tetra
+    //test curios+totem, curios+ench1, belt+poisonresist
     private void setup(final FMLCommonSetupEvent event)
     {
         CraftingHelper.register(new OptionalRecipeCondition.Serializer(new ResourceLocation(Constants.MODID, "optional")));

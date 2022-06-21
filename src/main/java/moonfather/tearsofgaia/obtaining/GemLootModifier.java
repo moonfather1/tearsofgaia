@@ -23,7 +23,7 @@ public class GemLootModifier extends LootModifier
 	@Override
 	public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context)
 	{
-		if (! context.getQueriedLootTableId().toString().equals("minecraft:blocks/diamond_ore") && ! context.getQueriedLootTableId().toString().equals("minecraft:blocks/emerald_ore"))
+		if (!IsBlockAGemOre(context.getQueriedLootTableId().toString()))
 		{
 			return generatedLoot;
 		}
@@ -52,6 +52,22 @@ public class GemLootModifier extends LootModifier
 		return generatedLoot;
 	}
 
+	private String[] tablesForGemOres = null;
+	private boolean IsBlockAGemOre(String lootTableId)
+	{
+		if (this.tablesForGemOres == null)
+		{
+			this.tablesForGemOres = OptionsHolder.COMMON.BlocksThatDropGaiasTears.get().trim().split("\\s*,\\s*");
+		}
+		for (int i = 0; i < this.tablesForGemOres.length; i++)
+		{
+			if (lootTableId.equals(this.tablesForGemOres[i]))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 
 	private static ItemStack GetRandomTear(int kind)
