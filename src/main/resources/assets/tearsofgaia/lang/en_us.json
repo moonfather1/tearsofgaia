@@ -9,9 +9,9 @@
 	"item.tearsofgaia.gem_earth.subtitle": "Element: earth",
 	"item.tearsofgaia.gem_fire.subtitle": "Element: fire",
 	
-	"item.tearsofgaia.gem_all.subtitle2": "You might be able to forge its essence into your tool.",
+	"item.tearsofgaia.gem_all.subtitle2": "You might be able to forge its essence into your tool (use anvil).",
 	
-	"item.tearsofgaia.gem_water.usage_1": "Increases the level of Smith's triumph enchantment (anvil cost limited) and removes curses. Items imbued with this tear do not expire in world.",
+	"item.tearsofgaia.gem_water.usage_1": "Increases the level of Smith's Triumph enchantment (anvil cost limited) and removes curses. Items imbued with this tear do not expire in world.",
 	"item.tearsofgaia.gem_fire.usage_1": "Items imbued with this tear do not expire in world and will not be destroyed by fire or lava. If dropped into lava, they will float until player picks them up.",
 	"item.tearsofgaia.gem_air.usage_1": "Items imbued with this tear do not expire in world and will not fall into void. If dropped above void, they will float until player picks them up.",
 	"item.tearsofgaia.gem_earth.usage_1": "Increases the level of unbreaking enchantment. Items imbued with this tear do not expire in world.",

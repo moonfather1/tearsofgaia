@@ -95,11 +95,11 @@ public class EventsForPersistence
 			ItemEntity e = (ItemEntity) iterator.next();
 			if (e.level == event.world)
 			{
-				if (!e.isAlive())
+				if (! e.isAlive())
 				{
 					iterator.remove();
 				}
-				else
+				else if (e.isInLava())
 				{
 					DoStupidParticles(e);
 				}
@@ -173,14 +173,14 @@ public class EventsForPersistence
 	}
 
 
-	private static HashSet<ItemEntity> droppedElementalItemsAir = new HashSet<ItemEntity>();
-	private static HashSet<ItemEntity> droppedElementalItemsFire = new HashSet<ItemEntity>();
+	private static final HashSet<ItemEntity> droppedElementalItemsAir = new HashSet<ItemEntity>();
+	private static final HashSet<ItemEntity> droppedElementalItemsFire = new HashSet<ItemEntity>();
 
 
 	@SubscribeEvent
 	public static void OnEntityJoinWorld(EntityJoinWorldEvent event)
 	{
-		if (!event.getWorld().isClientSide && event.getEntity() instanceof ItemEntity)
+		if (! event.getWorld().isClientSide && event.getEntity() instanceof ItemEntity)
 		{
 			ItemStack stack = ((ItemEntity)event.getEntity()).getItem();
 			if ((ElementalHelper.IsTear(stack) && ElementalHelper.GetTearElement(stack).equals("air"))
@@ -202,7 +202,7 @@ public class EventsForPersistence
 			else if ((ElementalHelper.IsTear(stack) && ElementalHelper.GetTearElement(stack).equals("fire"))
 					|| ElementalHelper.IsItemElementEqual(stack,"fire"))
 			{
-				if (!(event.getEntity() instanceof EntityItemWithFireImmunity))
+				if (! (event.getEntity() instanceof EntityItemWithFireImmunity))
 				{
 					EntityItemWithFireImmunity e2 = new EntityItemWithFireImmunity((ItemEntity) event.getEntity());
 					event.getEntity().remove(Entity.RemovalReason.DISCARDED);
