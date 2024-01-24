@@ -148,6 +148,7 @@ public class EventForSoulbound
 		if (itemToReturn.getItem().getRegistryName().getNamespace().equals("tetra"))
 		{
 			IntegrationTetra.ReduceLevelOfSoulbound(itemToReturn);
+			ReduceLevelOfSoulboundInternal(itemToReturn); // duplicating this to cover the issue with enchantment placed before vanilla->tetra change
 		}
 		else
 		{
