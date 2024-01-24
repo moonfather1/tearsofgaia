@@ -81,7 +81,7 @@ public class ElementalHelper
 
 	public static int GetNamedIntValue(ItemStack stack, String tagName)
 	{
-		if (stack.isEmpty() || stack.getTag() == null || !stack.getTag().contains(tagName))
+		if (stack.isEmpty() || stack.getTag() == null || ! stack.getTag().contains(tagName))
 		{
 			return 0;
 		}
@@ -92,6 +92,11 @@ public class ElementalHelper
 	{
 		if (stack.isEmpty())
 		{
+			return;
+		}
+		if (value <= 0)
+		{
+			stack.getOrCreateTag().remove(tagName);
 			return;
 		}
 		stack.getOrCreateTag().putInt(tagName, value);

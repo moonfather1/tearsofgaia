@@ -6,7 +6,7 @@ import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -98,7 +98,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 		ItemStack output = stack.copy();
 		if (event.getName() != null && !event.getName().equals(""))
 		{
-			output.setHoverName(new TextComponent(event.getName()));
+			output.setHoverName(Component.literal(event.getName()));
 		}
 		output.getOrCreateTag().putString(Constants.TAG_KEY_ELEMENT, element);
 		output.getOrCreateTag().putInt(Constants.TAG_KEY_LEVEL, 1);
@@ -182,7 +182,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 		ItemStack output = stack.copy();
 		if (event.getName() != null && !event.getName().equals(""))
 		{
-			output.setHoverName(new TextComponent(event.getName()));
+			output.setHoverName(Component.literal(event.getName()));
 		}
 		output.getOrCreateTag().putString(Constants.TAG_KEY_ELEMENT, element);
 		output.getOrCreateTag().putInt(Constants.TAG_KEY_LEVEL, 2);
@@ -275,6 +275,6 @@ public class AnvilHelperVanilla extends AnvilHelper
 
 	private static boolean IsNonStackable(ItemStack stack)
 	{
-		return stack.getItem().getItemStackLimit(stack) == 1;
+		return stack.getMaxStackSize() == 1;
 	}
 }

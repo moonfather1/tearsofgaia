@@ -24,7 +24,7 @@ public class OptionalRecipeCondition implements ICondition
 	}
 
 	@Override
-	public boolean test()
+	public boolean test(IContext context)
 	{
 		if (this.flagCode.equals("level_two_gems_enabled"))
 		{

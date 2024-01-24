@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +21,7 @@ public class EventsForPersistence
 	@SubscribeEvent
 	public static void OnItemExpire(ItemExpireEvent event)
 	{
-		if (ElementalHelper.IsTearOrElementalTool(event.getEntityItem().getItem()))
+		if (ElementalHelper.IsTearOrElementalTool(event.getEntity().getItem()))
 		{
 			event.setExtraLife(20*1200*5); // no expiration (5 extra days)
 			event.setCanceled(true);
@@ -79,13 +79,13 @@ public class EventsForPersistence
 
 
 	@SubscribeEvent
-	public static void DoWorldTickForFire(TickEvent.WorldTickEvent event)
+	public static void DoWorldTickForFire(TickEvent.LevelTickEvent event)
 	{
 		if (droppedElementalItemsFire.size() == 0)
 		{
 			return;
 		}
-		if (event.phase == TickEvent.Phase.START || event.world.isClientSide || event.world.getGameTime() % 2*20 != 0)
+		if (event.phase == TickEvent.Phase.START || event.level.isClientSide || event.level.getGameTime() % 2*20 != 0)
 		{
 			return;
 		}
@@ -93,13 +93,13 @@ public class EventsForPersistence
 		while (iterator.hasNext())
 		{
 			ItemEntity e = (ItemEntity) iterator.next();
-			if (e.level == event.world)
+			if (e.level == event.level)
 			{
-				if (!e.isAlive())
+				if (! e.isAlive())
 				{
 					iterator.remove();
 				}
-				else
+				else if (e.isInLava())
 				{
 					DoStupidParticles(e);
 				}
@@ -110,13 +110,13 @@ public class EventsForPersistence
 
 
 	@SubscribeEvent
-	public static void DoWorldTickForAir(TickEvent.WorldTickEvent event)
+	public static void DoWorldTickForAir(TickEvent.LevelTickEvent event)
 	{
 		if (droppedElementalItemsAir.size() == 0)
 		{
 			return;
 		}
-		if (event.phase == TickEvent.Phase.START || event.world.isClientSide || event.world.getGameTime() % 10 != 0)
+		if (event.phase == TickEvent.Phase.START || event.level.isClientSide || event.level.getGameTime() % 10 != 0)
 		{
 			return;
 		}
@@ -124,7 +124,7 @@ public class EventsForPersistence
 		while (iterator.hasNext())
 		{
 			ItemEntity e = (ItemEntity) iterator.next();
-			if (e.level == event.world)
+			if (e.level == event.level)
 			{
 				if (! e.isAlive())
 				{
@@ -173,14 +173,14 @@ public class EventsForPersistence
 	}
 
 
-	private static HashSet<ItemEntity> droppedElementalItemsAir = new HashSet<ItemEntity>();
-	private static HashSet<ItemEntity> droppedElementalItemsFire = new HashSet<ItemEntity>();
+	private static final HashSet<ItemEntity> droppedElementalItemsAir = new HashSet<ItemEntity>();
+	private static final HashSet<ItemEntity> droppedElementalItemsFire = new HashSet<ItemEntity>();
 
 
 	@SubscribeEvent
-	public static void OnEntityJoinWorld(EntityJoinWorldEvent event)
+	public static void OnEntityJoinWorld(EntityJoinLevelEvent event)
 	{
-		if (!event.getWorld().isClientSide && event.getEntity() instanceof ItemEntity)
+		if (! event.getLevel().isClientSide && event.getEntity() instanceof ItemEntity)
 		{
 			ItemStack stack = ((ItemEntity)event.getEntity()).getItem();
 			if ((ElementalHelper.IsTear(stack) && ElementalHelper.GetTearElement(stack).equals("air"))
@@ -202,11 +202,11 @@ public class EventsForPersistence
 			else if ((ElementalHelper.IsTear(stack) && ElementalHelper.GetTearElement(stack).equals("fire"))
 					|| ElementalHelper.IsItemElementEqual(stack,"fire"))
 			{
-				if (!(event.getEntity() instanceof EntityItemWithFireImmunity))
+				if (! (event.getEntity() instanceof EntityItemWithFireImmunity))
 				{
 					EntityItemWithFireImmunity e2 = new EntityItemWithFireImmunity((ItemEntity) event.getEntity());
 					event.getEntity().remove(Entity.RemovalReason.DISCARDED);
-					event.getWorld().addFreshEntity(e2);
+					event.getLevel().addFreshEntity(e2);
 					droppedElementalItemsFire.add(e2);
 				}
 			}

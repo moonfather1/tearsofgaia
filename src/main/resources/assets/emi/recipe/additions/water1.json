@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "tearsofgaia.gem_water"
+  ],
+  "text": "item.tearsofgaia.gem_water.usage_1"
+}

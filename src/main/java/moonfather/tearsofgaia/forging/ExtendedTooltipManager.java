@@ -63,7 +63,7 @@ public class ExtendedTooltipManager
 
 	/////////////////////////////////////////////////////////////////////////////////////
 
-	private static HashSet<PlayerLocationRecordForItems> storage = new HashSet<PlayerLocationRecordForItems>();
+	private static final HashSet<PlayerLocationRecordForItems> storage = new HashSet<PlayerLocationRecordForItems>();
 
 	private static class PlayerLocationRecordForItems
 	{
@@ -83,9 +83,9 @@ public class ExtendedTooltipManager
 	/////////////////////////////////////////////////////////////////////////////////////
 
 	@SubscribeEvent
-	public static void DoWorldTickForCleanup(TickEvent.WorldTickEvent event)
+	public static void DoWorldTickForCleanup(TickEvent.LevelTickEvent event)
 	{
-		if (!event.world.isClientSide() && event.world.getGameTime() % 120 == 19 && event.phase.equals(TickEvent.Phase.START))
+		if (! event.level.isClientSide() && event.level.getGameTime() % 120 == 19 && event.phase.equals(TickEvent.Phase.START))
 		{
 			Iterator<PlayerLocationRecordForItems> i = storage.iterator();
 			while (i.hasNext())
@@ -118,7 +118,7 @@ public class ExtendedTooltipManager
 		{
 			for (ItemStack stack : event.player.getInventory().items)
 			{
-				if (!stack.isEmpty() && stack.hasTag() && stack.getTag().contains(TOOLTIP_PLAYER))
+				if (! stack.isEmpty() && stack.hasTag() && stack.getTag().contains(TOOLTIP_PLAYER))
 				{
 					if (stack.getTag().getString(TOOLTIP_PLAYER).equals(event.player.getStringUUID()))
 					{

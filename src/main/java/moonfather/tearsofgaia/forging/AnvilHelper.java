@@ -4,6 +4,7 @@ import moonfather.tearsofgaia.integration.AnvilHelperTetra;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public abstract class AnvilHelper
 {
@@ -14,7 +15,7 @@ public abstract class AnvilHelper
 
 	public static AnvilHelper getInstance(Item item)
 	{
-		if (item.getRegistryName().getNamespace().equals("tetra"))
+		if (ForgeRegistries.ITEMS.getKey(item).getNamespace().equals("tetra"))
 		{
 			if (tetraInstance == null)
 			{

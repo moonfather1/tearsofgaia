@@ -3,6 +3,8 @@ package moonfather.tearsofgaia.enchantments;
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.RegistryManager;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -45,7 +47,7 @@ public class EnchantmentSoulbound extends Enchantment
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-		return stack.getItemEnchantability() > 0;
+		return stack.getEnchantmentValue() > 0;
 	}
 
 	@Override
@@ -56,6 +58,15 @@ public class EnchantmentSoulbound extends Enchantment
 
 	@Override
 	public boolean isAllowedOnBooks() { return OptionsHolder.COMMON.SoulboundBookEnabledInWorld.get(); }
+
+	@Override
+	public boolean allowedInCreativeTab(Item book, CreativeModeTab tab)
+	{
+		return true;
+	}
+
+
+
 
 	/**
 	 * Returns the maximum level that the enchantment can have.

@@ -18,6 +18,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Iterator;
 
@@ -27,14 +28,14 @@ public class EventForSoulbound
 	@SubscribeEvent
 	public static void OnClonePlayer(PlayerEvent.Clone event)
 	{
-		if (!event.isWasDeath() /* changed dimension */ || event.isCanceled())
+		if (! event.isWasDeath() /* changed dimension */ || event.isCanceled())
 		{
 			return;
 		}
 
-		OnClonePlayerInternal(event.getOriginal().getInventory().armor, event.getPlayer().getInventory().armor);
-		OnClonePlayerInternal(event.getOriginal().getInventory().items, event.getPlayer().getInventory().items);
-		OnClonePlayerInternal(event.getOriginal().getInventory().offhand, event.getPlayer().getInventory().offhand);
+		OnClonePlayerInternal(event.getOriginal().getInventory().armor, event.getEntity().getInventory().armor);
+		OnClonePlayerInternal(event.getOriginal().getInventory().items, event.getEntity().getInventory().items);
+		OnClonePlayerInternal(event.getOriginal().getInventory().offhand, event.getEntity().getInventory().offhand);
 	}
 
 
@@ -100,7 +101,7 @@ public class EventForSoulbound
 	@SubscribeEvent
 	public static void OnDeath(LivingDeathEvent event)
 	{
-		if (!event.isCanceled() && ! event.getEntity().level.isClientSide() && event.getEntity() instanceof Player)
+		if (! event.isCanceled() && ! event.getEntity().level.isClientSide() && event.getEntity() instanceof Player)
 		{
 			Player player = (Player) event.getEntity();
 			OnDeathInternal(player.getInventory().armor, "armor");
@@ -145,9 +146,10 @@ public class EventForSoulbound
 
 	public static void ReduceLevelOfSoulbound(ItemStack itemToReturn)
 	{
-		if (itemToReturn.getItem().getRegistryName().getNamespace().equals("tetra"))
+		if (ForgeRegistries.ITEMS.getKey(itemToReturn.getItem()).getNamespace().equals("tetra"))
 		{
 			IntegrationTetra.ReduceLevelOfSoulbound(itemToReturn);
+			ReduceLevelOfSoulboundInternal(itemToReturn); // also here to remove enchantments placed before van->tetra conversion
 		}
 		else
 		{

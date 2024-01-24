@@ -1,5 +1,6 @@
 package moonfather.tearsofgaia;
 
+import com.mojang.serialization.Codec;
 import moonfather.tearsofgaia.enchantments.EnchantmentEasyRepair;
 import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
 import moonfather.tearsofgaia.items.ItemGem;
@@ -7,7 +8,7 @@ import moonfather.tearsofgaia.items.OptionalRecipeCondition;
 import moonfather.tearsofgaia.obtaining.GemLootModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,13 +18,13 @@ public class RegistryManager
 {
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 	private static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Constants.MODID);
-	private static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, Constants.MODID);
+	private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Constants.MODID);
 
 	public static void Init()
 	{
 		RegistryManager.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		RegistryManager.ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		RegistryManager.LOOT_MODIFIER_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		RegistryManager.LOOT_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	public static final RegistryObject<Item> ItemGemEarth = ITEMS.register("gem_earth", () -> new ItemGem("earth", 1));
@@ -38,5 +39,5 @@ public class RegistryManager
 
 	public static final RegistryObject<Enchantment> EnchantmentSoulbound = ENCHANTMENTS.register("soulbound_mf", EnchantmentSoulbound::new);
 	public static final RegistryObject<Enchantment> EnchantmentEasyRepair = ENCHANTMENTS.register("repair_mf", EnchantmentEasyRepair::new);
-	public static final RegistryObject<GlobalLootModifierSerializer<GemLootModifier>> StupidGLMSerializer = LOOT_MODIFIER_SERIALIZERS.register("loot_modifier_for_gems", GemLootModifier.Serializer::new);
+	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> StupidGLMSerializer = LOOT_MODIFIERS.register("loot_modifier_for_gems", GemLootModifier.CODEC);
 }

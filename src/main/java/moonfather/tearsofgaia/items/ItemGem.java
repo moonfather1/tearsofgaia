@@ -4,7 +4,6 @@ package moonfather.tearsofgaia.items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.*;
 
 import java.util.HashMap;
@@ -18,10 +17,10 @@ public class ItemGem extends Item
 		this.element = element;
 		this.level = level;
 		this.subtitle1 = ItemGem.GetSubtitleLine1Text(element, level);
-		this.subtitle2Basic = new TranslatableComponent("item.tearsofgaia.gem_all.subtitle2").withStyle(ChatFormatting.GRAY);
-		this.subtitle2Usage = new TranslatableComponent(String.format("item.tearsofgaia.gem_%s.usage_%d", this.element, this.level)).withStyle(ChatFormatting.GRAY);
-		this.subtitle2UsageTetra = new TranslatableComponent(String.format("item.tearsofgaia.gem_%s.usage_%d_tetra", this.element, this.level)).withStyle(ChatFormatting.GRAY);
-		this.subtitle2Sep = new TextComponent(" ");
+		this.subtitle2Basic = Component.translatable("item.tearsofgaia.gem_all.subtitle2").withStyle(ChatFormatting.GRAY);
+		this.subtitle2Usage = Component.translatable(String.format("item.tearsofgaia.gem_%s.usage_%d", this.element, this.level)).withStyle(ChatFormatting.GRAY);
+		this.subtitle2UsageTetra = Component.translatable(String.format("item.tearsofgaia.gem_%s.usage_%d_tetra", this.element, this.level)).withStyle(ChatFormatting.GRAY);
+		this.subtitle2Sep = Component.literal(" ");
 	}
 
 	private static Properties GetProperties(String element)
@@ -57,14 +56,14 @@ public class ItemGem extends Item
 			case "fire": color = TextColor.fromRgb(0xff8c1a); break;
 			case "air": color = TextColor.fromRgb(0xeeeeff); break;
 		}
-		TextComponent result = new TextComponent("");
+		MutableComponent result = Component.literal("");
 		String subtitle1Key = String.format("item.tearsofgaia.gem_%s.subtitle", element);
-		TranslatableComponent elementText = new TranslatableComponent(subtitle1Key);
+		MutableComponent elementText = Component.translatable(subtitle1Key);
 		elementText.withStyle(Style.EMPTY.withColor(color));
 		result.append(elementText);
 		if (level > 1)
 		{
-			result.append(new TranslatableComponent("item.tearsofgaia.level_suffix", " ", level));
+			result.append(Component.translatable("item.tearsofgaia.level_suffix", " ", level));
 		}
 		return result;
 	}

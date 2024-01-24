@@ -3,12 +3,13 @@ package moonfather.tearsofgaia.integration;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class IntegrationTinkersTools
 {
 	public static boolean isTinkersTool(ItemStack stack)
 	{
-		return stack.getItem().getRegistryName().getNamespace().equals("tconstruct");
+		return ForgeRegistries.ITEMS.getKey(stack.getItem()).getNamespace().equals("tconstruct");
 	}
 
 	public static void makeAndStoreResult(ItemStack left, ItemStack right, AnvilUpdateEvent event)

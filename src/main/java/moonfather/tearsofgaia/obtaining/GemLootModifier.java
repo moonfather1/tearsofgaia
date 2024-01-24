@@ -1,7 +1,9 @@
 package moonfather.tearsofgaia.obtaining;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.RegistryManager;
 import net.minecraft.resources.ResourceLocation;
@@ -9,9 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
-import java.util.List;
+
+import java.util.function.Supplier;
 
 public class GemLootModifier extends LootModifier
 {
@@ -21,7 +24,7 @@ public class GemLootModifier extends LootModifier
 	}
 
 	@Override
-	public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context)
+	public ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
 	{
 		if (!IsBlockAGemOre(context.getQueriedLootTableId().toString()))
 		{
@@ -84,20 +87,14 @@ public class GemLootModifier extends LootModifier
 
 
 
-	public static class Serializer extends GlobalLootModifierSerializer<GemLootModifier>
-	{
-		@Override
-		public GemLootModifier read(ResourceLocation name, JsonObject json, LootItemCondition[] conditionsIn)
-		{
-			return new GemLootModifier(conditionsIn);
-		}
+	///////////////////////////////////////////////////////////
 
-		@Override
-		public JsonObject write(GemLootModifier luckBlockDropsModifier)
-		{
-			JsonObject result = new JsonObject();
-			result.add("conditions", new JsonArray());
-			return result;
-		}
+	@Override
+	public Codec<? extends IGlobalLootModifier> codec() {
+		return CODEC.get();
 	}
+
+	public static final Supplier<Codec<GemLootModifier>> CODEC = Suppliers.memoize(() ->
+			RecordCodecBuilder.create(inst -> codecStart(inst)
+					.apply(inst, GemLootModifier::new)));
 }

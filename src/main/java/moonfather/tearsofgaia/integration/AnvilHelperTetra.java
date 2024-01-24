@@ -5,7 +5,7 @@ import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
 import moonfather.tearsofgaia.forging.AnvilHelperVanilla;
 import moonfather.tearsofgaia.forging.ElementalHelper;
 
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -24,7 +24,7 @@ public class AnvilHelperTetra extends AnvilHelperVanilla
 		{
 			return false;
 		}
-		return stack.getItem().getItemStackLimit(stack) == 1;
+		return stack.getMaxStackSize() == 1;
 	}
 
 
@@ -54,9 +54,9 @@ public class AnvilHelperTetra extends AnvilHelperVanilla
 		if (element.equals("earth"))
 		{
 			ItemStack output = stack.copy();
-			if (event.getName() != null && !event.getName().equals(""))
+			if (event.getName() != null && ! event.getName().equals(""))
 			{
-				output.setHoverName(new TextComponent(event.getName()));
+				output.setHoverName(Component.literal(event.getName()));
 			}
 			output.getOrCreateTag().putString(Constants.TAG_KEY_ELEMENT, element);
 			output.getOrCreateTag().putInt(Constants.TAG_KEY_LEVEL, 1);
@@ -68,9 +68,9 @@ public class AnvilHelperTetra extends AnvilHelperVanilla
 		{
 			ItemStack output = stack.copy();
 			output.setDamageValue(output.getDamageValue() / 2); //i'll consider this
-			if (event.getName() != null && !event.getName().equals(""))
+			if (event.getName() != null && ! event.getName().equals(""))
 			{
-				output.setHoverName(new TextComponent(event.getName()));
+				output.setHoverName(Component.literal(event.getName()));
 			}
 			output.getOrCreateTag().putString(Constants.TAG_KEY_ELEMENT, element);
 			output.getOrCreateTag().putInt(Constants.TAG_KEY_LEVEL, 1);
@@ -89,9 +89,9 @@ public class AnvilHelperTetra extends AnvilHelperVanilla
 	public void ImbueItemToLevel2(ItemStack stack, String element, AnvilUpdateEvent event)
 	{
 		ItemStack output = stack.copy();
-		if (event.getName() != null && !event.getName().equals(""))
+		if (event.getName() != null && ! event.getName().equals(""))
 		{
-			output.setHoverName(new TextComponent(event.getName()));
+			output.setHoverName(Component.literal(event.getName()));
 		}
 		output.getOrCreateTag().putString(Constants.TAG_KEY_ELEMENT, element);
 		output.getOrCreateTag().putInt(Constants.TAG_KEY_LEVEL, 2);

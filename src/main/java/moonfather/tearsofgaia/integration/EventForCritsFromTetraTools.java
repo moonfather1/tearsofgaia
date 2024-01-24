@@ -14,7 +14,7 @@ public class EventForCritsFromTetraTools
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void OnLivingHurt(LivingHurtEvent event)
 	{
-		if (! event.getEntityLiving().level.isClientSide && event.getSource().getEntity() != null)
+		if (! event.getEntity().level.isClientSide && event.getSource().getEntity() != null)
 		{
 			if (event.getSource().getEntity() instanceof LivingEntity)
 			{
