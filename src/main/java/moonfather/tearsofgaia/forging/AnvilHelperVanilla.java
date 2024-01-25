@@ -14,6 +14,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class AnvilHelperVanilla extends AnvilHelper
 {
@@ -110,7 +111,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = Registry.ENCHANTMENT.getOptional(ResourceLocation.tryParse(nbttagcompound.getString("id"))).orElse(null);
+				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment == Enchantments.UNBREAKING)
 				{
 					int level = nbttagcompound.getShort("lvl");
@@ -138,7 +139,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = Registry.ENCHANTMENT.getOptional(ResourceLocation.tryParse(nbttagcompound.getString("id"))).orElse(null);
+				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment != null && enchantment.isCurse())
 				{
 					nbttaglist.remove(i);
@@ -195,7 +196,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = Registry.ENCHANTMENT.getOptional(ResourceLocation.tryParse(nbttagcompound.getString("id"))).orElse(null);
+				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment == EnchantmentSoulbound.GetInstance())
 				{
 					int level = nbttagcompound.getShort("lvl");
@@ -222,7 +223,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = Registry.ENCHANTMENT.getOptional(ResourceLocation.tryParse(nbttagcompound.getString("id"))).orElse(null);
+				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment == null)
 				{
 					i = i + 1;

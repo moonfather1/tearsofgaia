@@ -2,6 +2,6 @@
 	"parent": "item/generated",
 	"textures": 
 	{
-		"layer0": "tearsofgaia:items/fire"
+		"layer0": "tearsofgaia:item/fire"
 	}
 }

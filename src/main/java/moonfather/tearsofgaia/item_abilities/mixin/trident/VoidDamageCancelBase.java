@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class VoidDamageCancelBase
 {
     @SuppressWarnings("CancellableInjectionUsage")
-    @Inject(at = @At("HEAD"), method = "outOfWorld", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "onBelowWorld", cancellable = true)
     protected void CancelVoidDamage(CallbackInfo ci)
     {
         // marker for override

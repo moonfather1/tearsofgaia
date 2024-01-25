@@ -19,7 +19,7 @@ public class ExtendedTooltipManager
 	public static final String TOOLTIP_IS_TETRA = "tog_ex_tooltip_tetra";
 	public static void ActivateExtendedTooltip(ItemStack stack, Player player, ItemStack otherItem)
 	{
-		if (! player.level.isClientSide())
+		if (! player.level().isClientSide())
 		{
 			// it is only here where i'm building a second tooltip system (having discarded 5 more ideas) that i discover that anvil has a client event and that i could have used that in first system (one that counts down in tooltip method)
 			stack.getOrCreateTag().putString(TOOLTIP_PLAYER, player.getStringUUID());
@@ -114,7 +114,7 @@ public class ExtendedTooltipManager
 	@SubscribeEvent
 	public static void DoPlayerTickForCleanup(TickEvent.PlayerTickEvent event)
 	{
-		if (event.player.level.getGameTime() % 200 == 19 && event.phase.equals(TickEvent.Phase.START))
+		if (event.player.level().getGameTime() % 200 == 19 && event.phase.equals(TickEvent.Phase.START))
 		{
 			for (ItemStack stack : event.player.getInventory().items)
 			{

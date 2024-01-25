@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +30,7 @@ public class EventForResistancesFromTetraTools
 		if (event.getEffectInstance().getEffect().equals(MobEffects.POISON))
 		{
 			// clientside event fires if i allow serverside. can't deny it on client, otherwise i get a poison but no indicator.
-			if (! event.getEntity().level.isClientSide)
+			if (! event.getEntity().level().isClientSide)
 			{
 				ItemStack tool = event.getEntity().getMainHandItem();
 				if (CheckItemsForElementalItem(tool, "earth") && (tool.getDamageValue() == 0 || tool.getDamageValue() < tool.getMaxDamage() * 0.95))
@@ -83,7 +84,7 @@ public class EventForResistancesFromTetraTools
 		else if (event.getEffectInstance().getEffect().equals(MobEffects.WITHER))
 		{
 			// clientside event fires if i allow serverside. can't deny it on client, otherwise i get a poison but no indicator.
-			if (! event.getEntity().level.isClientSide)
+			if (! event.getEntity().level().isClientSide)
 			{
 				ItemStack tool = event.getEntity().getMainHandItem();
 				if (CheckItemsForElementalItem(tool, "water") && (tool.getDamageValue() == 0 || tool.getDamageValue() < tool.getMaxDamage() * 0.95))
@@ -190,7 +191,7 @@ public class EventForResistancesFromTetraTools
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void OnLivingHurt(LivingHurtEvent event)
 	{
-		if (event.getSource().isExplosion() && ! event.getEntity().level.isClientSide)
+		if (event.getSource().is(DamageTypeTags.IS_EXPLOSION) && ! event.getEntity().level().isClientSide)
 		{
 			if (CheckItemsForElementalItem(event.getEntity().getMainHandItem(), "water", 2))
 			{

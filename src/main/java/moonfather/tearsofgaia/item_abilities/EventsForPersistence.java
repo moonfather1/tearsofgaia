@@ -36,12 +36,12 @@ public class EventsForPersistence
 	private static void DoItemFloat(ItemEntity entity)
 	{
 		DoStupidParticles(entity);
-		if (entity.getY() < entity.level.getMinBuildHeight() + 3.8)
+		if (entity.getY() < entity.level().getMinBuildHeight() + 3.8)
 		{
 			// fell out of world
 			if (entity.getDeltaMovement().y() == zeroHeightFloatVelocity)
 			{
-				if (entity.getY() >= entity.level.getMinBuildHeight() + 1.9)
+				if (entity.getY() >= entity.level().getMinBuildHeight() + 1.9)
 				{
 					entity.setNoGravity(true);
 					entity.setDeltaMovement(0, -zeroHeightFloatVelocity, 0);
@@ -50,7 +50,7 @@ public class EventsForPersistence
 			}
 			else if (entity.getDeltaMovement().y() == -zeroHeightFloatVelocity)
 			{
-				if (entity.getY() < entity.level.getMinBuildHeight() + -1)
+				if (entity.getY() < entity.level().getMinBuildHeight() + -1)
 				{
 					entity.setNoGravity(true);
 					entity.setDeltaMovement(0, +zeroHeightFloatVelocity, 0);
@@ -67,7 +67,7 @@ public class EventsForPersistence
 		else
 		{
 			// ne bi trebalo da se desi!
-			if (entity.getY() >= entity.level.getMinBuildHeight() + 9.9 && entity.getDeltaMovement().y() == zeroHeightFloatVelocity)
+			if (entity.getY() >= entity.level().getMinBuildHeight() + 9.9 && entity.getDeltaMovement().y() == zeroHeightFloatVelocity)
 			{
 				entity.setNoGravity(false);
 				entity.setDeltaMovement(0, -zeroHeightFloatVelocity, 0);
@@ -93,7 +93,7 @@ public class EventsForPersistence
 		while (iterator.hasNext())
 		{
 			ItemEntity e = (ItemEntity) iterator.next();
-			if (e.level == event.level)
+			if (e.level() == event.level)
 			{
 				if (! e.isAlive())
 				{
@@ -124,14 +124,14 @@ public class EventsForPersistence
 		while (iterator.hasNext())
 		{
 			ItemEntity e = (ItemEntity) iterator.next();
-			if (e.level == event.level)
+			if (e.level() == event.level)
 			{
 				if (! e.isAlive())
 				{
 					//System.out.println("dead " + e.getItem().getDisplayName() + "; speed==" + e.motionY + "; set_size==" + droppedElementalItemsAir.size());
 					iterator.remove();
 				}
-				else if (e.getY() < e.level.getMinBuildHeight() + 0 || e.getDeltaMovement().y() == zeroHeightFloatVelocity || e.getDeltaMovement().y() == -zeroHeightFloatVelocity || e.getTags().contains("DoItemFloat"))
+				else if (e.getY() < e.level().getMinBuildHeight() + 0 || e.getDeltaMovement().y() == zeroHeightFloatVelocity || e.getDeltaMovement().y() == -zeroHeightFloatVelocity || e.getTags().contains("DoItemFloat"))
 				{
 					//System.out.println("below zero: " + e.getItem().getDisplayName() + "; Y==" + e.posY + "; speed==" + e.motionY + "; set_size==" + droppedElementalItemsAir.size());
 					DoItemFloat(e);
@@ -145,22 +145,22 @@ public class EventsForPersistence
 
 	private static void DoStupidParticles(Entity entity)
 	{
-		if (entity.level.getGameTime() % 5 != 0)
+		if (entity.level().getGameTime() % 5 != 0)
 		{
 			//System.out.println("NO particles for " + ((EntityItem)entity).getItem().getDisplayName());
 			return;
 		}
 		//((WorldServer)entity.world).spawnParticle(EnumParticleTypes.VILLAGER_ANGRY, entity.posX + (double)(entity.world.rand.nextFloat() * entity.width * 2.0F) - (double)entity.width, entity.posY + 0.5D + (double)(entity.world.rand.nextFloat() * entity.height), entity.posZ + (double)(entity.world.rand.nextFloat() * entity.width * 2.0F) - (double)entity.width, entity.world.rand.nextFloat(), entity.world.rand.nextFloat(), entity.world.rand.nextFloat());
-		if (entity.level instanceof ServerLevel)
+		if (entity.level() instanceof ServerLevel)
 		{
 			//((WorldServer) entity.world).spawnParticle(EnumParticleTypes.VILLAGER_ANGRY, true, entity.posX + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width, entity.posY + 0.5D + (double) (entity.world.rand.nextFloat() * entity.height), entity.posZ + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width, entity.world.rand.nextFloat(), entity.world.rand.nextFloat(), entity.world.rand.nextFloat(), 1, 2, 3);
 			double xSpeed, ySpeed, zSpeed;
 			for (int i = 1; i <= 8; i++)
 			{
-				xSpeed = (entity.level.random.nextFloat() - 0.5D) * 0.40D;
-				ySpeed = (entity.level.random.nextFloat() - 0.5D) * 0.05D;
-				zSpeed = (entity.level.random.nextFloat() - 0.5D) * 0.40D;
-				((ServerLevel)entity.level).sendParticles(ParticleTypes.INSTANT_EFFECT,entity.getX() + xSpeed * 8, entity.getY() + ySpeed * 6, entity.getZ() + zSpeed * 8, 1 /*numberOfParticles*/, xSpeed, ySpeed, zSpeed  , 0.10d /*particleSpeed*/ /*, int... particleArguments*/);
+				xSpeed = (entity.level().random.nextFloat() - 0.5D) * 0.40D;
+				ySpeed = (entity.level().random.nextFloat() - 0.5D) * 0.05D;
+				zSpeed = (entity.level().random.nextFloat() - 0.5D) * 0.40D;
+				((ServerLevel)entity.level()).sendParticles(ParticleTypes.INSTANT_EFFECT,entity.getX() + xSpeed * 8, entity.getY() + ySpeed * 6, entity.getZ() + zSpeed * 8, 1 /*numberOfParticles*/, xSpeed, ySpeed, zSpeed  , 0.10d /*particleSpeed*/ /*, int... particleArguments*/);
 				//entityItem.worldObj.spawnParticle(particleType, entityItem.posX + xSpeed * 8, entityItem.posY + ySpeed * 4, entityItem.posZ + zSpeed * 8, xSpeed, 2 * ySpeed, zSpeed, new int[0]);
 			}
 
@@ -188,14 +188,14 @@ public class EventsForPersistence
 			{
 				//System.out.println("join world " + stack.getDisplayName() + "; speed==" + event.getEntity().motionY);
 				droppedElementalItemsAir.add((ItemEntity) event.getEntity());
-				if (event.getEntity().getY() < event.getEntity().level.getMinBuildHeight() + 0)
+				if (event.getEntity().getY() < event.getEntity().level().getMinBuildHeight() + 0)
 				{
 					event.getEntity().setNoGravity(true);
 					event.getEntity().setDeltaMovement(0, zeroHeightFloatVelocity, 0);
-					if (event.getEntity().getY() < event.getEntity().level.getMinBuildHeight() + -20)
+					if (event.getEntity().getY() < event.getEntity().level().getMinBuildHeight() + -20)
 					{
 						//System.out.println("void?");
-						event.getEntity().setPos(event.getEntity().getX(), event.getEntity().level.getMinBuildHeight() + -19, event.getEntity().getZ());
+						event.getEntity().setPos(event.getEntity().getX(), event.getEntity().level().getMinBuildHeight() + -19, event.getEntity().getZ());
 					}
 				}
 			}

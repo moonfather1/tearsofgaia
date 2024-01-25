@@ -20,6 +20,7 @@ public class ModTears
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, OptionsHolder.COMMON_SPEC);
         RegistryManager.Init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistryManager::OnCreativeTabPopulation);
     }
 
 

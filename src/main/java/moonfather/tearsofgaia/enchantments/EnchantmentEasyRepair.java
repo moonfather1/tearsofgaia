@@ -9,6 +9,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Set;
+
 public class EnchantmentEasyRepair extends Enchantment
 {
 	public static Enchantment GetInstance() { return RegistryManager.EnchantmentEasyRepair.get(); }
@@ -80,7 +82,7 @@ public class EnchantmentEasyRepair extends Enchantment
 
 
 	@Override
-	public boolean allowedInCreativeTab(Item book, CreativeModeTab tab)
+	public boolean allowedInCreativeTab(Item book, Set<EnchantmentCategory> allowedCategories)
 	{
 		return true;
 	}

@@ -2,6 +2,7 @@ package moonfather.tearsofgaia.item_abilities;
 
 import moonfather.tearsofgaia.forging.ElementalHelper;
 import net.minecraft.core.NonNullList;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,11 +21,11 @@ public class EventForItemGrantingFireImmunity
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void OnLivingHurt(LivingHurtEvent event)
 	{
-		if (event.isCanceled() || event.getEntity().level.isClientSide)
+		if (event.isCanceled() || event.getEntity().level().isClientSide)
 		{
 			return;
 		}
-		if (!(event.getEntity() instanceof Player) || !(event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.LAVA))
+		if (! (event.getEntity() instanceof Player) || ! event.getSource().is(DamageTypeTags.IS_FIRE))
 		{
 			return;
 		}
@@ -36,7 +37,7 @@ public class EventForItemGrantingFireImmunity
 		while (i.hasNext())
 		{
 			PlayerRecord cached = (PlayerRecord) i.next();
-			if (event.getEntity().level.getGameTime() > cached.recordCreationTimestamp + 20 * 12 /*12s*/)
+			if (event.getEntity().level().getGameTime() > cached.recordCreationTimestamp + 20 * 12 /*12s*/)
 			{
 				i.remove();
 				continue;
@@ -48,7 +49,7 @@ public class EventForItemGrantingFireImmunity
 				{
 					player = cached.player;
 					item = stack;
-					cached.recordCreationTimestamp = event.getEntity().level.getGameTime();
+					cached.recordCreationTimestamp = event.getEntity().level().getGameTime();
 					foundInCache = true;
 					break;
 				}
@@ -116,17 +117,17 @@ public class EventForItemGrantingFireImmunity
 		int slot = LookForFireLevel2(player.getInventory().armor, 1000);
 		if (slot >= 0)
 		{
-			return new PlayerRecord(player, player.level.getGameTime(), slot, 'A');
+			return new PlayerRecord(player, player.level().getGameTime(), slot, 'A');
 		}
 		slot = LookForFireLevel2(player.getInventory().offhand, 1000);
 		if (slot >= 0)
 		{
-			return new PlayerRecord(player, player.level.getGameTime(), slot, 'O');
+			return new PlayerRecord(player, player.level().getGameTime(), slot, 'O');
 		}
 		slot = LookForFireLevel2(player.getInventory().items, 9);
 		if (slot >= 0)
 		{
-			return new PlayerRecord(player, player.level.getGameTime(), slot, 'M');
+			return new PlayerRecord(player, player.level().getGameTime(), slot, 'M');
 		}
 		return null;
 	}

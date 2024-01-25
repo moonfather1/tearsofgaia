@@ -14,18 +14,17 @@ public class EventForCritsFromTetraTools
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void OnLivingHurt(LivingHurtEvent event)
 	{
-		if (! event.getEntity().level.isClientSide && event.getSource().getEntity() != null)
+		if (! event.getEntity().level().isClientSide && event.getSource().getEntity() != null)
 		{
 			if (event.getSource().getEntity() instanceof LivingEntity)
 			{
 				ItemStack item = ((LivingEntity) event.getSource().getEntity()).getMainHandItem();
 				if (EventForResistancesFromTetraTools.CheckItemsForElementalItem(item, "fire"))
 				{
-					int rollResult = event.getSource().getEntity().level.random.nextInt(100);
+					int rollResult = event.getSource().getEntity().level().random.nextInt(100);
 					if (rollResult < OptionsHolder.COMMON.TetraPercentageChanceForCriticalStrike.get())
 					{
-						event.setAmount(event.getAmount() * 2);
-						event.getSource().setIsFire();
+						event.setAmount(event.getAmount() * 2);  //setIsFire() no longer exists
 					}
 				}
 			}

@@ -5,6 +5,7 @@ import moonfather.tearsofgaia.integration.CuriosInventory;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -23,11 +24,11 @@ public class EventForTotem
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void OnPlayerDeath(LivingDeathEvent event)
 	{
-		if (event.isCanceled() || event.getEntity().level.isClientSide || event.getSource().isBypassInvul())
+		if (event.isCanceled() || event.getEntity().level().isClientSide || event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY))
 		{
 			return;
 		}
-		if (!(event.getEntity() instanceof Player))
+		if (! (event.getEntity() instanceof Player))
 		{
 			return;
 		}
@@ -68,7 +69,7 @@ public class EventForTotem
 		player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
 		player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
 		player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
-		player.level.broadcastEntityEvent(player, (byte)35);
+		player.level().broadcastEntityEvent(player, (byte)35);
 		//System.out.println("EventHandlersForPlayerHarm.OnPlayerDeath()");
 	}
 

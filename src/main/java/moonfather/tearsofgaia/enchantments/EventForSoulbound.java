@@ -43,7 +43,7 @@ public class EventForSoulbound
 	@SubscribeEvent
 	public static void OnPlayerDrops(LivingDropsEvent event)
 	{
-		if (! event.getEntity().level.isClientSide() && event.getEntity() instanceof Player)
+		if (! event.getEntity().level().isClientSide() && event.getEntity() instanceof Player)
 		{
 			Player player = (Player) event.getEntity();
 			Iterator i = event.getDrops().iterator();
@@ -101,7 +101,7 @@ public class EventForSoulbound
 	@SubscribeEvent
 	public static void OnDeath(LivingDeathEvent event)
 	{
-		if (! event.isCanceled() && ! event.getEntity().level.isClientSide() && event.getEntity() instanceof Player)
+		if (! event.isCanceled() && ! event.getEntity().level().isClientSide() && event.getEntity() instanceof Player)
 		{
 			Player player = (Player) event.getEntity();
 			OnDeathInternal(player.getInventory().armor, "armor");
@@ -163,7 +163,7 @@ public class EventForSoulbound
 		for (int i = 0; i < nbttaglist.size(); ++i)
 		{
 			CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-			Enchantment enchantment = Registry.ENCHANTMENT.getOptional(ResourceLocation.tryParse(nbttagcompound.getString("id"))).orElse(null);
+			Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 			if (! (enchantment == EnchantmentSoulbound.GetInstance()))
 			{
 				continue;

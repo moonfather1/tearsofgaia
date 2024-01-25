@@ -1,10 +1,12 @@
 package moonfather.tearsofgaia.items;
 
 
+import moonfather.tearsofgaia.RegistryManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,6 @@ public class ItemGem extends Item
 		Item.Properties properties = new Properties();
 		properties.setNoRepair();
 		properties.rarity(Rarity.RARE);
-		properties.tab(CreativeModeTab.TAB_MISC);
 		if (element.equals("fire"))
 		{
 			properties.fireResistant();
@@ -38,11 +39,11 @@ public class ItemGem extends Item
 
 
 
-	private static Map<String, Component> subtitleLine1 = new HashMap<String, Component>();
+	private static final Map<String, Component> subtitleLine1 = new HashMap<String, Component>();
 
 	private String element = "none";
 	private int level = 1;
-	private Component subtitle1, subtitle2Basic, subtitle2Usage, subtitle2UsageTetra, subtitle2Sep;
+	private final Component subtitle1, subtitle2Basic, subtitle2Usage, subtitle2UsageTetra, subtitle2Sep;
 
 
 

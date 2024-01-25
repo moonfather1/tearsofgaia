@@ -6,9 +6,11 @@ import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
 import moonfather.tearsofgaia.items.ItemGem;
 import moonfather.tearsofgaia.items.OptionalRecipeCondition;
 import moonfather.tearsofgaia.obtaining.GemLootModifier;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -40,4 +42,21 @@ public class RegistryManager
 	public static final RegistryObject<Enchantment> EnchantmentSoulbound = ENCHANTMENTS.register("soulbound_mf", EnchantmentSoulbound::new);
 	public static final RegistryObject<Enchantment> EnchantmentEasyRepair = ENCHANTMENTS.register("repair_mf", EnchantmentEasyRepair::new);
 	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> StupidGLMSerializer = LOOT_MODIFIERS.register("loot_modifier_for_gems", GemLootModifier.CODEC);
+
+	/////////////////////////////////////////////////////
+
+	public static void OnCreativeTabPopulation(BuildCreativeModeTabContentsEvent event)
+	{
+		if (event.getTabKey().equals(CreativeModeTabs.INGREDIENTS))
+		{
+			event.accept(RegistryManager.ItemGemEarth);
+			event.accept(RegistryManager.ItemGemWater);
+			event.accept(RegistryManager.ItemGemAir);
+			event.accept(RegistryManager.ItemGemFire);
+			event.accept(RegistryManager.ItemGemEarth2);
+			event.accept(RegistryManager.ItemGemWater2);
+			event.accept(RegistryManager.ItemGemAir2);
+			event.accept(RegistryManager.ItemGemFire2);
+		}
+	}
 }

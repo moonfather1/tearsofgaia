@@ -10,6 +10,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
 
+import java.util.Set;
+
 public class EnchantmentSoulbound extends Enchantment
 {
 	public static Enchantment GetInstance() { return RegistryManager.EnchantmentSoulbound.get(); }
@@ -60,7 +62,7 @@ public class EnchantmentSoulbound extends Enchantment
 	public boolean isAllowedOnBooks() { return OptionsHolder.COMMON.SoulboundBookEnabledInWorld.get(); }
 
 	@Override
-	public boolean allowedInCreativeTab(Item book, CreativeModeTab tab)
+	public boolean allowedInCreativeTab(Item book, Set<EnchantmentCategory> allowedCategories)
 	{
 		return true;
 	}
