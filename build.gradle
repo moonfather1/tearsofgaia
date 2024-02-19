@@ -6,7 +6,7 @@ plugins {
 }
 
 
-version = '1.1'
+version = '1.1.2'
 group = 'moonfather.tearsofgaia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'tearsofgaia--mc1.19.2-'
 
