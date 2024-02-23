@@ -2,12 +2,12 @@ package moonfather.tearsofgaia.enchantments;
 
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.RegistryManager;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 
@@ -75,7 +75,7 @@ public class EnchantmentEasyRepair extends Enchantment
 	@Override
 	public boolean canEnchant(ItemStack stack)
 	{
-		return this.canApplyAtEnchantingTable(stack) && ! ForgeRegistries.ITEMS.getKey(stack.getItem()).getNamespace().equals("tetra");
+		return this.canApplyAtEnchantingTable(stack) && ! BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace().equals("tetra");
 	}
 
 

@@ -6,11 +6,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.item.ItemExpireEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.item.ItemExpireEvent;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -89,10 +89,10 @@ public class EventsForPersistence
 		{
 			return;
 		}
-		Iterator iterator = droppedElementalItemsFire.iterator();
+		Iterator<ItemEntity> iterator = droppedElementalItemsFire.iterator();
 		while (iterator.hasNext())
 		{
-			ItemEntity e = (ItemEntity) iterator.next();
+			ItemEntity e = iterator.next();
 			if (e.level() == event.level)
 			{
 				if (! e.isAlive())
@@ -120,10 +120,10 @@ public class EventsForPersistence
 		{
 			return;
 		}
-		Iterator iterator = droppedElementalItemsAir.iterator();
+		Iterator<ItemEntity> iterator = droppedElementalItemsAir.iterator();
 		while (iterator.hasNext())
 		{
-			ItemEntity e = (ItemEntity) iterator.next();
+			ItemEntity e = iterator.next();
 			if (e.level() == event.level)
 			{
 				if (! e.isAlive())
@@ -131,7 +131,7 @@ public class EventsForPersistence
 					//System.out.println("dead " + e.getItem().getDisplayName() + "; speed==" + e.motionY + "; set_size==" + droppedElementalItemsAir.size());
 					iterator.remove();
 				}
-				else if (e.getY() < e.level().getMinBuildHeight() + 0 || e.getDeltaMovement().y() == zeroHeightFloatVelocity || e.getDeltaMovement().y() == -zeroHeightFloatVelocity || e.getTags().contains("DoItemFloat"))
+				else if (e.getY() < e.level().getMinBuildHeight() || e.getDeltaMovement().y() == zeroHeightFloatVelocity || e.getDeltaMovement().y() == -zeroHeightFloatVelocity || e.getTags().contains("DoItemFloat"))
 				{
 					//System.out.println("below zero: " + e.getItem().getDisplayName() + "; Y==" + e.posY + "; speed==" + e.motionY + "; set_size==" + droppedElementalItemsAir.size());
 					DoItemFloat(e);
@@ -188,7 +188,7 @@ public class EventsForPersistence
 			{
 				//System.out.println("join world " + stack.getDisplayName() + "; speed==" + event.getEntity().motionY);
 				droppedElementalItemsAir.add((ItemEntity) event.getEntity());
-				if (event.getEntity().getY() < event.getEntity().level().getMinBuildHeight() + 0)
+				if (event.getEntity().getY() < event.getEntity().level().getMinBuildHeight())
 				{
 					event.getEntity().setNoGravity(true);
 					event.getEntity().setDeltaMovement(0, zeroHeightFloatVelocity, 0);

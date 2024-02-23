@@ -7,9 +7,7 @@ import moonfather.tearsofgaia.item_abilities.mixin.accessors.TridentAccessor3;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ThrownTrident.class)
@@ -18,7 +16,7 @@ public abstract class TridentVoidPoke extends VoidDamageCancelBase
     @Override
     protected void CancelVoidDamage(CallbackInfo ci)
     {
-        if (ElementalHelper.IsItemElementEqual(tridentItem, "air"))
+        if (ElementalHelper.IsItemElementEqual(((TridentAccessor3)this).invokeGetItem(), "air"))
         {
             if (((TridentAccessor3)this).invokePickup() == AbstractArrow.Pickup.ALLOWED)
             {
@@ -32,8 +30,4 @@ public abstract class TridentVoidPoke extends VoidDamageCancelBase
             }
         }
     }
-
-
-    @Shadow
-    private ItemStack tridentItem;
 }

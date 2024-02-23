@@ -1,13 +1,10 @@
 package moonfather.tearsofgaia;
 
-import moonfather.tearsofgaia.items.OptionalRecipeCondition;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 
 @Mod(Constants.MODID)
@@ -15,18 +12,17 @@ public class ModTears
 {
     //private static final Logger LOGGER = LogUtils.getLogger();
 
-    public ModTears()
+    public ModTears(IEventBus modBus)
     {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, OptionsHolder.COMMON_SPEC);
-        RegistryManager.Init();
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistryManager::OnCreativeTabPopulation);
+        RegistryManager.Init(modBus);
+        modBus.addListener(this::setup);
+        modBus.addListener(RegistryManager::OnCreativeTabPopulation);
     }
 
 
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        CraftingHelper.register(new OptionalRecipeCondition.Serializer(new ResourceLocation(Constants.MODID, "optional")));
 	}
 }

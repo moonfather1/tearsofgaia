@@ -3,6 +3,7 @@ package moonfather.tearsofgaia.integration;
 import moonfather.tearsofgaia.OptionsHolder;
 import moonfather.tearsofgaia.forging.ElementalHelper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -10,14 +11,13 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 import java.util.Random;
 
@@ -175,7 +175,7 @@ public class EventForResistancesFromTetraTools
 
 	static boolean CheckItemsForElementalItem(ItemStack item, String element, int level)
 	{
-		if (ForgeRegistries.ITEMS.getKey(item.getItem()).getNamespace().equals("tetra"))
+		if (BuiltInRegistries.ITEM.getKey(item.getItem()).getNamespace().equals("tetra"))
 		{
 			String itemElement = ElementalHelper.GetItemElement(item);
 			if (itemElement != null && itemElement.equals(element) && ElementalHelper.GetItemElementLevel(item) >= level)

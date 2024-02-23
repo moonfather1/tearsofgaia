@@ -1,7 +1,6 @@
 package moonfather.tearsofgaia;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class OptionsHolder
@@ -18,17 +17,17 @@ public class OptionsHolder
 		private static final int defaultTetraPercentageChanceResistingPoison = 75;
 		private static final int defaultTetraPercentageChanceResistingWither = 75;
 
-		public final ConfigValue<Integer> NumberOfTearsInA1000DiamondBlocks;
-		public final ConfigValue<Boolean> ShouldReplaceAGem;
-		public final ConfigValue<Boolean> LevelTwoGemsEnabled;
-		public final ConfigValue<Boolean> SoulboundBookEnabledInWorld;
-		public final ConfigValue<Boolean> RepairBookEnabledInWorld;
-		public final ConfigValue<String> BlocksThatDropGaiasTears;
-		public final ConfigValue<Integer> TetraPercentageChanceForCriticalStrike;
-		public final ConfigValue<Integer> TetraPercentageChanceResistingPoison;
-		public final ConfigValue<Integer> TetraPercentageChanceResistingWither;
+		public final ModConfigSpec.ConfigValue<Integer> NumberOfTearsInA1000DiamondBlocks;
+		public final ModConfigSpec.ConfigValue<Boolean> ShouldReplaceAGem;
+		public final ModConfigSpec.ConfigValue<Boolean> LevelTwoGemsEnabled;
+		public final ModConfigSpec.ConfigValue<Boolean> SoulboundBookEnabledInWorld;
+		public final ModConfigSpec.ConfigValue<Boolean> RepairBookEnabledInWorld;
+		public final ModConfigSpec.ConfigValue<String> BlocksThatDropGaiasTears;
+		public final ModConfigSpec.ConfigValue<Integer> TetraPercentageChanceForCriticalStrike;
+		public final ModConfigSpec.ConfigValue<Integer> TetraPercentageChanceResistingPoison;
+		public final ModConfigSpec.ConfigValue<Integer> TetraPercentageChanceResistingWither;
 
-		public Common(ForgeConfigSpec.Builder builder)
+		public Common(ModConfigSpec.Builder builder)
 		{
 			this.NumberOfTearsInA1000DiamondBlocks = builder.comment("Gaia's tears are obtained from diamond ore blocks and emerald ore blocks. This is a weight value which sets how often you will find a tear gem. Default value is 100 (meaning 50 out of every 1000, or in other words 5%) and might even be a generous weight. Set to 0 do disable (in which case you need to establish a different way of obtaining these gems). There is no worldgen.")
 					.defineInRange("Number of tears in a 1000 gem blocks", defaultNumberOfTearsInA1000DiamondBlocks, 0, 1000);
@@ -54,11 +53,11 @@ public class OptionsHolder
 	}
 
 	public static final Common COMMON;
-	public static final ForgeConfigSpec COMMON_SPEC;
+	public static final ModConfigSpec COMMON_SPEC;
 
 	static //constructor
 	{
-		Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Common::new);
 		COMMON = commonSpecPair.getLeft();
 		COMMON_SPEC = commonSpecPair.getRight();
 	}

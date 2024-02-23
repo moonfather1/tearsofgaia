@@ -2,16 +2,16 @@ package moonfather.tearsofgaia.integration;
 
 import moonfather.tearsofgaia.forging.ElementalHelper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public class IntegrationTetra
 {
 	public static boolean IsASoulboundTool(ItemStack tool)
 	{
-		if (! tool.isEmpty() && ForgeRegistries.ITEMS.getKey(tool.getItem()).getNamespace().equals("tetra"))
+		if (! tool.isEmpty() && BuiltInRegistries.ITEM.getKey(tool.getItem()).getNamespace().equals("tetra"))
 		{
 			if (ElementalHelper.GetNamedIntValue(tool, AnvilHelperTetra.TAG_KEY_SOULBOUND_LEVEL) > 0)
 			{
@@ -25,7 +25,7 @@ public class IntegrationTetra
 
 	public static boolean IsTetraTool(ItemStack tool)
 	{
-		return ForgeRegistries.ITEMS.getKey(tool.getItem()).getNamespace().equals("tetra");
+		return BuiltInRegistries.ITEM.getKey(tool.getItem()).getNamespace().equals("tetra");
 	}
 
 
@@ -53,6 +53,7 @@ public class IntegrationTetra
 			case 1: suffix = " I"; break;
 			case 2: suffix = " II"; break;
 			case 3: suffix = " III"; break;
+			default: suffix = " " + soulboundLevel;
 		}
 		event.getToolTip().add(Component.translatable("enchantment.tearsofgaia.soulbound_mf").append(suffix).withStyle(ChatFormatting.YELLOW));
 	}

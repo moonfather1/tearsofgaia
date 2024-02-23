@@ -19,7 +19,7 @@
     "count": 1
   },
   "group": "misc",
-  "conditions":
+  "neoforge:conditions":
   [
     {
       "type": "tearsofgaia:optional",

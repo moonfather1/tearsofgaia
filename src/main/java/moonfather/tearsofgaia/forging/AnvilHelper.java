@@ -1,10 +1,10 @@
 package moonfather.tearsofgaia.forging;
 
 import moonfather.tearsofgaia.integration.AnvilHelperTetra;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.AnvilUpdateEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
 public abstract class AnvilHelper
 {
@@ -15,7 +15,7 @@ public abstract class AnvilHelper
 
 	public static AnvilHelper getInstance(Item item)
 	{
-		if (ForgeRegistries.ITEMS.getKey(item).getNamespace().equals("tetra"))
+		if (BuiltInRegistries.ITEM.getKey(item).getNamespace().equals("tetra"))
 		{
 			if (tetraInstance == null)
 			{

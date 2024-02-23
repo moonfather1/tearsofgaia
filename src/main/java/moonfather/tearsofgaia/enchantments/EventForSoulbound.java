@@ -3,7 +3,7 @@ package moonfather.tearsofgaia.enchantments;
 import moonfather.tearsofgaia.integration.CuriosInventory;
 import moonfather.tearsofgaia.integration.IntegrationTetra;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -12,13 +12,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.Iterator;
 
@@ -28,7 +28,7 @@ public class EventForSoulbound
 	@SubscribeEvent
 	public static void OnClonePlayer(PlayerEvent.Clone event)
 	{
-		if (! event.isWasDeath() /* changed dimension */ || event.isCanceled())
+		if (! event.isWasDeath() /* changed dimension */ || (event.hasResult() && event.getResult().equals(Event.Result.DENY)))
 		{
 			return;
 		}
@@ -43,13 +43,12 @@ public class EventForSoulbound
 	@SubscribeEvent
 	public static void OnPlayerDrops(LivingDropsEvent event)
 	{
-		if (! event.getEntity().level().isClientSide() && event.getEntity() instanceof Player)
+		if (! event.getEntity().level().isClientSide() && event.getEntity() instanceof Player player)
 		{
-			Player player = (Player) event.getEntity();
-			Iterator i = event.getDrops().iterator();
+			Iterator<ItemEntity> i = event.getDrops().iterator();
 			while (i.hasNext())
 			{
-				ItemEntity ei = (ItemEntity) i.next();
+				ItemEntity ei = i.next();
 				if (IsItemSoulbound(ei))
 				{
 					CompoundTag t = ei.getItem().getOrCreateTagElement("Soulbound_temp");
@@ -146,7 +145,7 @@ public class EventForSoulbound
 
 	public static void ReduceLevelOfSoulbound(ItemStack itemToReturn)
 	{
-		if (ForgeRegistries.ITEMS.getKey(itemToReturn.getItem()).getNamespace().equals("tetra"))
+		if (BuiltInRegistries.ITEM.getKey(itemToReturn.getItem()).getNamespace().equals("tetra"))
 		{
 			IntegrationTetra.ReduceLevelOfSoulbound(itemToReturn);
 			ReduceLevelOfSoulboundInternal(itemToReturn); // also here to remove enchantments placed before van->tetra conversion
@@ -163,7 +162,7 @@ public class EventForSoulbound
 		for (int i = 0; i < nbttaglist.size(); ++i)
 		{
 			CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-			Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
+			Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 			if (! (enchantment == EnchantmentSoulbound.GetInstance()))
 			{
 				continue;

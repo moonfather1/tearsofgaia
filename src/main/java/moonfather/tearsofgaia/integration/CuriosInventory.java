@@ -15,7 +15,7 @@ public class CuriosInventory
 {
 	public static void PutItemBack(Player player, ItemStack item, String location, int slot)
 	{
-		CuriosApi.getCuriosHelper().getCuriosHandler(player).ifPresent(
+		CuriosApi.getCuriosInventory(player).ifPresent(
 				(ih)->
 				{
 					ICurioStacksHandler sh = ih.getCurios().get(location.substring(7)); // "curios-belt" -> "belt"
@@ -24,38 +24,11 @@ public class CuriosInventory
 		);
 	}
 
-	/*public static void CopyAllToClonedPlayer(PlayerEntity originalPlayer, PlayerEntity newPlayer)
-	{
-		CuriosApi.getCuriosHelper().getCuriosHandler(originalPlayer).ifPresent(     this one just returns false
-				(ih)->
-				{
-					CuriosApi.getCuriosHelper().getCuriosHandler(newPlayer).ifPresent(
-							(ih2)->
-							{
-								for (String slotName : ih.getCurios().keySet())
-								{
-									ICurioStacksHandler sh = ih.getCurios().get(slotName);
-									for (int slot = 0; slot < sh.getStacks().getSlots(); slot++)
-									{
-										if (EventForSoulbound.IsItemSoulbound(sh.getStacks().getStackInSlot(slot)))
-										{
-											ItemStack itemToReturn = sh.getStacks().getStackInSlot(slot).copy();
-											EventForSoulbound.ReduceLevelOfSoulbound(itemToReturn);
-											ih2.getCurios().get(slotName).getStacks().setStackInSlot(slot, itemToReturn);
-										}
-									}
-								}
-							}
-					);
-				}
-		);
-	}*/
-
 
 
 	public static void MarkItemsWithLocations(Player player)
 	{
-		CuriosApi.getCuriosHelper().getCuriosHandler(player).ifPresent(
+		CuriosApi.getCuriosInventory(player).ifPresent(
 				(ih)->
 				{
 					ih.getCurios().forEach((key, value) ->
@@ -78,7 +51,7 @@ public class CuriosInventory
 	public static List<ItemStack> GetFlatList(LivingEntity entity)
 	{
 		List<ItemStack> result = new ArrayList<>();
-		CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(
+		CuriosApi.getCuriosInventory(entity).ifPresent(
 				(ih)->
 				{
 					for (ICurioStacksHandler sh : ih.getCurios().values())

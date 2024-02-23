@@ -3,13 +3,12 @@ package moonfather.tearsofgaia.item_abilities;
 import moonfather.tearsofgaia.forging.ElementalHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,17 +31,17 @@ public class EventForItemGrantingFireImmunity
 
 		Player player = null;
 		ItemStack item = ItemStack.EMPTY;
-		Iterator i = playersWithFireLevel2Item.iterator();
+		Iterator<PlayerRecord> i = playersWithFireLevel2Item.iterator();
 		boolean foundInCache = false;
 		while (i.hasNext())
 		{
-			PlayerRecord cached = (PlayerRecord) i.next();
+			PlayerRecord cached = i.next();
 			if (event.getEntity().level().getGameTime() > cached.recordCreationTimestamp + 20 * 12 /*12s*/)
 			{
 				i.remove();
 				continue;
 			}
-			if (cached.player == ((Player)event.getEntity()))
+			if (cached.player == event.getEntity())
 			{
 				ItemStack stack = GetPlayersSlotContents(cached);
 				if (stack != ItemStack.EMPTY && ItemIsntTooDamaged(stack) && ElementalHelper.IsItemElementEqual(stack, "fire") && ElementalHelper.GetItemElementLevel(stack) == 2)
@@ -150,7 +149,7 @@ public class EventForItemGrantingFireImmunity
 
 
 
-	private static ArrayList<PlayerRecord> playersWithFireLevel2Item = new ArrayList<PlayerRecord>();
+	private static final ArrayList<PlayerRecord> playersWithFireLevel2Item = new ArrayList<PlayerRecord>();
 
 	private static class PlayerRecord
 	{

@@ -8,7 +8,7 @@ import moonfather.tearsofgaia.forging.ElementalHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
 public class AnvilHelperTetra extends AnvilHelperVanilla
 {

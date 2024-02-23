@@ -11,11 +11,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+
 import java.util.List;
 
 @Mod.EventBusSubscriber
@@ -28,14 +29,13 @@ public class EventForTotem
 		{
 			return;
 		}
-		if (! (event.getEntity() instanceof Player))
+		if (! (event.getEntity() instanceof Player player))
 		{
 			return;
 		}
 
 
 		ItemStack found;
-		Player player = (Player) event.getEntity();
 		found = LookForAirLevel2(player.getInventory().armor);
 		if (found == ItemStack.EMPTY)
 		{

@@ -3,7 +3,7 @@ package moonfather.tearsofgaia.forging;
 import moonfather.tearsofgaia.Constants;
 import moonfather.tearsofgaia.enchantments.EnchantmentEasyRepair;
 import moonfather.tearsofgaia.enchantments.EnchantmentSoulbound;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -13,8 +13,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraftforge.event.AnvilUpdateEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
 public class AnvilHelperVanilla extends AnvilHelper
 {
@@ -111,7 +110,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
+				Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment == Enchantments.UNBREAKING)
 				{
 					int level = nbttagcompound.getShort("lvl");
@@ -139,7 +138,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
+				Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment != null && enchantment.isCurse())
 				{
 					nbttaglist.remove(i);
@@ -196,7 +195,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
+				Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment == EnchantmentSoulbound.GetInstance())
 				{
 					int level = nbttagcompound.getShort("lvl");
@@ -223,7 +222,7 @@ public class AnvilHelperVanilla extends AnvilHelper
 			while (i < nbttaglist.size())
 			{
 				CompoundTag nbttagcompound = nbttaglist.getCompound(i);
-				Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(nbttagcompound.getString("id")));
+				Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(ResourceLocation.tryParse(nbttagcompound.getString("id")));
 				if (enchantment == null)
 				{
 					i = i + 1;

@@ -15,19 +15,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ThrownTrident.class)
 public abstract class TridentDespawnPoke extends AbstractArrow
 {
-    private TridentDespawnPoke(EntityType<? extends AbstractArrow> p_36721_, Level p_36722_) { super(p_36721_, p_36722_); }
+    private TridentDespawnPoke(EntityType<? extends AbstractArrow> p_36711_, Level p_36715_, ItemStack p_308982_) { super(p_36711_, p_36715_, p_308982_); }
 
 
     @Inject(method = "tickDespawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow; tickDespawn()V"), cancellable = true)
     private void PreventDespawn(CallbackInfo ci)
     {
-        if (ElementalHelper.IsElementalTool(tridentItem))
+        if (ElementalHelper.IsElementalTool(this.getPickupItemStackOrigin()))
         {
             ci.cancel();
         }
     }
-
-
-    @Shadow
-    private ItemStack tridentItem;
 }

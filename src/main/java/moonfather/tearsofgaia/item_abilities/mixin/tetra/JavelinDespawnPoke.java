@@ -17,10 +17,11 @@ import se.mickelus.tetra.items.modular.ThrownModularItemEntity;
 @Mixin(ThrownModularItemEntity.class)
 public abstract class JavelinDespawnPoke extends AbstractArrow
 {
-    private JavelinDespawnPoke(EntityType<? extends AbstractArrow> p_36721_, Level p_36722_) { super(p_36721_, p_36722_); }
+    private JavelinDespawnPoke(EntityType<? extends AbstractArrow> p_36711_, Level p_36715_, ItemStack p_308982_) { super(p_36711_, p_36715_, p_308982_); }
 
 
-    @Inject(method = "tickDespawn", at = @At(value = "INVOKE", target = "se/mickelus/tetra/items/modular/ThrownModularItemEntity.discard ()V"), cancellable = true)
+    //@Inject(method = "tickDespawn", at = @At(value = "INVOKE", target = "se/mickelus/tetra/items/modular/ThrownModularItemEntity.discard ()V"), cancellable = true)
+    @Inject(method = "m_6901_", at = @At(value = "INVOKE", target = "se/mickelus/tetra/items/modular/ThrownModularItemEntity.m_146870_ ()V"), cancellable = true)
     private void PreventDespawn(CallbackInfo ci)
     {
         if (ElementalHelper.IsElementalTool(thrownStack))

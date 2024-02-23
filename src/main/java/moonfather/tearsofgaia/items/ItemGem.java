@@ -1,12 +1,10 @@
 package moonfather.tearsofgaia.items;
 
 
-import moonfather.tearsofgaia.RegistryManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 
 import java.util.HashMap;
 import java.util.Map;
